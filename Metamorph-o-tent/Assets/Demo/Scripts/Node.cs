@@ -41,6 +41,7 @@ public class Node : MonoBehaviour {
 	}
 
 	public void nodeHover(){
+		print ("Node touched");
 		transform.localScale = new Vector3 
 			(transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, transform.localScale.z * scaleAmount);
 

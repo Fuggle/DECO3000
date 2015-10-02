@@ -7,18 +7,39 @@ public class NodeController : MonoBehaviour {
 	public GameObject node;
 
 	public List<GameObject> nodeList;
+	public List<GameObject> nodeHitList;
 
-
+	public float checkRadius = 0.1f;
 
 	void Start () 
 	{
 		nodeList = new List<GameObject>();
+		nodeHitList = new List<GameObject>();
 	}
 	
 	public void createNode(Vector3 touchLocation)
 	{
-		//creates node and adds to 'nodeList'
-		nodeList.Add((GameObject)Instantiate (node, touchLocation , transform.rotation));
+
+		Collider[] nodeHitList = Physics.OverlapSphere (touchLocation, checkRadius);
+		//print ("NODEHIT list count: " + nodeHitList.Length);
+		//print (nodeHitList [0]);
+		if (nodeHitList.Length == 1 ) {
+			//creates node and adds to 'nodeList'
+			nodeList.Add((GameObject)Instantiate (node, touchLocation , transform.rotation));
+			return;
+		}
+
+		foreach (Collider nodes in nodeHitList) {
+			if(nodes.tag == "Node"){
+				print ("make node hover");
+				Node nodeScript = nodes.gameObject.GetComponent<Node>();
+				nodeScript.nodeHover();
+			}
+		}
+
+
+
+
 	}
 	
 }

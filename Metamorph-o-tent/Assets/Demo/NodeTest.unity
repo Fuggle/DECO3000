@@ -206,6 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   node: {fileID: 175978, guid: 29671bdf95f56b041a09f6bee9169b7b, type: 2}
   nodeList: []
+  nodeHitList: []
+  checkRadius: 1
 --- !u!4 &239073293
 Transform:
   m_ObjectHideFlags: 0
@@ -521,6 +523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   node: {fileID: 175978, guid: 29671bdf95f56b041a09f6bee9169b7b, type: 2}
   nodeList: []
+  nodeHitList: []
+  checkRadius: 10
 --- !u!1 &1801669720
 GameObject:
   m_ObjectHideFlags: 0

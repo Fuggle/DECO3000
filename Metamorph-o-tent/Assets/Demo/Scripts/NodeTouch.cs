@@ -13,6 +13,7 @@ public class NodeTouch : MonoBehaviour {
 	void Update () {
 
 
+
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
@@ -27,13 +28,17 @@ public class NodeTouch : MonoBehaviour {
 					nodeController.createNode(hit.point);
 				}
 				
-			} else{
-				if(hit.collider.gameObject.tag == "node"){
+			} 
+			/*
+			else{
+
+
+				if(hit.collider.gameObject.tag == "Node"){
 					GameObject node = hit.collider.gameObject;
 					Node nodeScript = node.GetComponent<Node>();
 					nodeScript.nodeHover();
 				}
-			}
+			}*/
 		}
 	}
 }
