@@ -5,18 +5,27 @@ using System.Collections.Generic;
 public class NodeController : MonoBehaviour {
 
 	public GameObject node;
-
+	public GameObject centralNode;
+	public GameObject nodeConnector;
 	public List<GameObject> nodeList;
-	public List<GameObject> nodeHitList;
+	List<GameObject> nodeHitList;
 
-	public float checkRadius = 0.1f;
+	public float checkRadius = 1f;
+	bool moveNode;
 
 	void Start () 
 	{
 		nodeList = new List<GameObject>();
 		nodeHitList = new List<GameObject>();
 	}
-	
+
+	void Update(){
+		if (moveNode) {
+
+
+		}
+	}
+
 	public void createNode(Vector3 touchLocation)
 	{
 
@@ -31,15 +40,30 @@ public class NodeController : MonoBehaviour {
 
 		foreach (Collider nodes in nodeHitList) {
 			if(nodes.tag == "Node"){
-				print ("make node hover");
 				Node nodeScript = nodes.gameObject.GetComponent<Node>();
 				nodeScript.nodeHover();
 			}
 		}
 
+	}
+
+	public void TriggerEvent(Transform triggeredNode)
+	{
+		print ("TriggerEvent!!");
+		moveNode = true;
+		/*
+		foreach (Transform node in nodeList) {
+			Transform previousNode;
+			previousNode = triggeredNode;
+			float distance = Vector3.Distance(previousNode, node.position);
 
 
-
+			List<Transform> nodePath = new List<Transform>();
+			if(node != previousNode){
+				nodePath.Add(node);
+				previou
+			}
+		}*/
 	}
 	
 }

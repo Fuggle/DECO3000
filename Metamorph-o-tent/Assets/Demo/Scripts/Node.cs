@@ -8,9 +8,12 @@ public class Node : MonoBehaviour {
 	NodeController nodeController;
 	List<GameObject> nodeList;
 	float scaleAmount = 1.01f;
+	float decayAmount = 0.9995f;
 	float maxScale = 5;
-	// Use this for initialization
-	void Start () {
+	float minScale = 0.2f;
+
+	void Start () 
+	{
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineRenderer.enabled = false;
 		nodeController = Camera.main.GetComponent<NodeController> ();
@@ -18,12 +21,15 @@ public class Node : MonoBehaviour {
 		print (transform.localScale.magnitude);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Update () 
+	{
+		slowDecay ();
 	}
 
-	public void lineConnection(){
+
+	public void lineConnection()
+	{
 		print ("NodeCount: " + nodeList.Count);
 		if (nodeList.Count > 1 ) {
 			for (int i = 0; i<nodeList.Count-1; i++) {
@@ -34,19 +40,48 @@ public class Node : MonoBehaviour {
 		}
 	}
 
-	public void nodeTouched(){
+	/// <summary>
+	/// When the node is touched change color.
+	/// </summary>
+	public void nodeTouched()
+	{
 		Renderer nodeRenderer = GetComponent<Renderer>();
 		nodeRenderer.material.color = Color.blue;
 		lineConnection ();
 	}
 
-	public void nodeHover(){
-		print ("Node touched");
+	/// <summary>
+	/// On hover of the node increase scale.
+	/// </summary>
+	public void nodeHover()
+	{
 		transform.localScale = new Vector3 
 			(transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, transform.localScale.z * scaleAmount);
 
 		if (transform.localScale.magnitude > maxScale) {
 			lineConnection();
+			nodeController.TriggerEvent(this.gameObject.transform);
 		}
+	}
+
+	/// <summary>
+	/// Slowly decays the node.
+	/// </summary>
+	void slowDecay()
+	{
+		transform.localScale = new Vector3 
+			(transform.localScale.x * decayAmount, transform.localScale.y * decayAmount, transform.localScale.z * decayAmount);
+
+		if (transform.localScale.magnitude < minScale) {
+			destroyNode();
+		}
+	}
+
+	/// <summary>
+	/// Destroys the node.
+	/// </summary>
+	void destroyNode()
+	{
+		Destroy (this.gameObject);
 	}
 }

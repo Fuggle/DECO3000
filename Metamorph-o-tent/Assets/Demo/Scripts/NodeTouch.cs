@@ -12,15 +12,14 @@ public class NodeTouch : MonoBehaviour {
 	//test for placing nodes (will be replaced by En's kinect touch code)
 	void Update () {
 
-
-
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
 			//checks to see if ray is hitting existing node
-			if (Input.GetMouseButtonDown (0)) {
+			if (Input.GetMouseButton (0)) {
 			
-				if(hit.collider.gameObject.tag == "node"){
+				if(hit.collider.gameObject.tag == "Node"){
+					print ("hit node directly");
 					GameObject node = hit.collider.gameObject;
 					Node nodeScript = node.GetComponent<Node>();
 					nodeScript.nodeTouched();
