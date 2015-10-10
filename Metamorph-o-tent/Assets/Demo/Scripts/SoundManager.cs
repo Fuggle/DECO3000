@@ -28,15 +28,33 @@ public class SoundManager : MonoBehaviour {
 
 	}
 
+	/** 
+	Adjusts the volume based on size of an object.
+	Accepts range between 0.5-10.
+	 **/
+	public IEnumerator autoVolume(float size){
+		if ((size > 10f) || (size < 0.5f)) {
+			return false;
+		}
+		for (var i = 0; i < 10; i++){
+			if (size > bgm.volume) {
+				lowerVolume();
+			} else {
+				raiseVolume();
+			}
+			yield return new WaitForSeconds(.5f);
+		}
+	}
+
 	//raise volume
-	public void raiseVolume () {
+	private void raiseVolume () {
 		bgm = this.gameObject.GetComponent<AudioSource>();
-		bgm.volume = 1;
+		bgm.volume = bgm.volume + 0.1f;
 	}
 
 	//raise volume to the level given, gradually
 	//level should be between 0 and 1
-	public IEnumerator raiseVolume (float level) {
+	private IEnumerator raiseVolume (float level) {
 		bgm = this.gameObject.GetComponent<AudioSource> ();
 		Debug.Log ("raising volume...");
 		//make sure level given is between 0 and 1;
@@ -55,14 +73,14 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	//lower volume
-	public void lowerVolume () {
+	private void lowerVolume () {
 		bgm = this.gameObject.GetComponent<AudioSource>();
 		bgm.volume = 0.1f;
 	}
 
 	//lower volume to the level given, gradually
 	//level should be between 0 and 1
-	public IEnumerator lowerVolume (float level) {
+	private IEnumerator lowerVolume (float level) {
 		bgm = this.gameObject.GetComponent<AudioSource> ();
 		Debug.Log ("lowering volume...");
 		//make sure level given is between 0 and 1;
@@ -89,6 +107,11 @@ public class SoundManager : MonoBehaviour {
 		sfx.PlayOneShot(soundLayer, 1);
 
 	}
+
+	//Add specified sound
+	/*public void addLayer () {
+	
+	}*/
 
 	public IEnumerator pitchUp (float level) {
 		bgm = this.gameObject.GetComponent<AudioSource> ();
