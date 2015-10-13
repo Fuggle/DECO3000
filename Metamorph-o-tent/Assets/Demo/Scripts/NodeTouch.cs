@@ -23,6 +23,7 @@ public class NodeTouch : MonoBehaviour {
 					GameObject node = hit.collider.gameObject;
 					Node nodeScript = node.GetComponent<Node>();
 					nodeScript.nodeTouched();
+					nodeScript.nodeHover();
 				} else{
 					nodeController.createNode(hit.point);
 				}
