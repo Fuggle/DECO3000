@@ -49,9 +49,9 @@ public class DepthManager : MonoBehaviour {
         }
 
         //When space is pressed write current data into a file
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("S key is pressed");
+            print("Space key is pressed");
             if(data != null)
             {
                 //Path where the file is written. root location is project root
