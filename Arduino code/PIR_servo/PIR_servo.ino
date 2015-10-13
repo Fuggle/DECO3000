@@ -6,7 +6,7 @@
 
 #include <Servo.h>
 
-Servo myservo1, myservo2, myservo3;  //creates a servo object
+//Servo myservo1, myservo2, myservo3;  //creates a servo object
                          //a maximum of eight servo objects can be created
 
 int pos = 0;        //variable to store servo position
@@ -29,9 +29,9 @@ int pirPin = 12;            //digital pin connected to the PIR's output
 int pirPos = 13;           //connects to the PIR's 5V pin
 
 void setup(){
-  myservo1.attach(9);  //attaches servo1 to pin 9
-  myservo2.attach(8);  //attaches servo2 to pin 8
-  myservo3.attach(7);  //attaches servo3 to pin 7  
+  //myservo1.attach(9);  //attaches servo1 to pin 9
+  //myservo2.attach(8);  //attaches servo2 to pin 8
+  //myservo3.attach(7);  //attaches servo3 to pin 7  
   Serial.begin(9600);    //begins serial communication
   pinMode(pirPin, INPUT);
   pinMode(pirPos, OUTPUT);
@@ -68,13 +68,13 @@ void loop(){
     to learn more about this, google "for loops"
     to change the amount of degrees the servo turns, change the number 180 to the number of degrees you want it to turn
     **/
-    for(pos = 0; pos < 180; pos += 1)  //goes from 0 to 180 degrees
+    /*for(pos = 0; pos < 180; pos += 1)  //goes from 0 to 180 degrees
     {                                                 //in steps of one degree
       myservo1.write(pos);  
       myservo2.write(pos);
       myservo3.write(pos);                   //tells servo to go to position in variable "pos"
       delay(5);                                   //waits for the servo to reach the position
-    }
+    }*/
   
    /** for(pos = 180; pos>=1; pos-=1)    //goes from 180 to 0 degrees
     {                               
