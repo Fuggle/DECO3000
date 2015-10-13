@@ -9,7 +9,7 @@ public class Node : MonoBehaviour {
 	List<GameObject> nodeList;
 	float scaleAmount = 1.01f;
 	float decayAmount = 0.9995f;
-	float maxScale = 5;
+	public float maxScale = 4;
 	float minScale = 0.2f;
 
 	void Start () 

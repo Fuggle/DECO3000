@@ -34,7 +34,8 @@ public class SoundManager : MonoBehaviour {
 	 **/
 	public IEnumerator autoVolume(float size){
 		if ((size > 10f) || (size < 0.5f)) {
-			return false;
+			//had to comment line below because it was causing errors with the IEnumerator
+			//return false;
 		}
 		for (var i = 0; i < 10; i++){
 			if (size > bgm.volume) {
