@@ -9,6 +9,8 @@ public class DepthManager : MonoBehaviour {
     private KinectSensor sensor;
     private DepthFrameReader reader;
     private ushort[] data;
+	private bool state;
+	private int length = 0;
 
 
 	// Use this for initialization
@@ -21,7 +23,11 @@ public class DepthManager : MonoBehaviour {
         {
             reader = sensor.DepthFrameSource.OpenReader();
             data = new ushort[sensor.DepthFrameSource.FrameDescription.LengthInPixels];
+			length = (int)sensor.DepthFrameSource.FrameDescription.LengthInPixels;
         }
+
+		//Initial state is false, to show that data steam has not started yet
+		state = false;
 	}
 	
 	// Update is called once per frame
@@ -37,13 +43,15 @@ public class DepthManager : MonoBehaviour {
                 frame.CopyFrameDataToArray(data);
                 frame.Dispose();
                 frame = null;
-            }
+            } else {
+				state = true;
+			}
         }
 
         //When space is pressed write current data into a file
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("space key is pressed");
+            print("Space key is pressed");
             if(data != null)
             {
                 //Path where the file is written. root location is project root
@@ -60,7 +68,7 @@ public class DepthManager : MonoBehaviour {
                 }
 
                 //Prints out a sample, if this is not zero, you are probably detecting something
-                print(data[23]);
+                print(data[222]);
             }
         }
 	}
@@ -90,4 +98,13 @@ public class DepthManager : MonoBehaviour {
         //returns the depth information as a list of ushort
         return data;
     }
+
+	public bool IsReading(){
+		return state;
+	}
+
+	public int GetDataLength(){
+		print (length);
+		return length;
+	}
 }
