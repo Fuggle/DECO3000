@@ -8,7 +8,7 @@ long unsigned int lowIn;
 
 //the amount of milliseconds the sensor has to be low
 //before we assume all motion has stopped
-long unsigned int pause = 1800; 
+long unsigned int pause = 800; 
 
 boolean lockLow = true;
 boolean takeLowTime; 
@@ -17,9 +17,6 @@ int pirPin = 12;            //digital pin connected to the PIR's output
 int pirPos = 13;           //connects to the PIR's 5V pin
 int pirPin2 = 10;
 int pirPos2 = 11;
-
-//int slavePinOut = 4; //output from slave
-//int slavePinIn = 5; //input t0 slave
 
 void setup(){
   Wire.begin();
@@ -54,9 +51,15 @@ void setup(){
 void loop(){
 
   if(digitalRead(pirPin) == HIGH || digitalRead(pirPin2) == HIGH){  
-    Wire.beginTransmission(2); //device #2
+    Wire.beginTransmission(checkSensors()); //device #2
     Wire.write(1);
     Wire.endTransmission();
+    /*Wire.beginTransmission(7); //device #2
+    Wire.write(1);
+    Wire.endTransmission();
+    Wire.beginTransmission(6); //device #2
+    Wire.write(1);
+    Wire.endTransmission();*/
     //analogWrite(slavePinIn, 255); //sends start servo message to slave arduino
     Serial.println("motion");
     if(lockLow){ 
@@ -83,7 +86,13 @@ void loop(){
     if(!lockLow && millis() - lowIn > pause){
       //makes sure this block of code is only executed again after
       //a new motion sequence has been detected
-      Wire.beginTransmission(2); //device #2
+      Wire.beginTransmission(8); //device #8
+      Wire.write(0);
+      Wire.endTransmission();
+      Wire.beginTransmission(7); //device #7
+      Wire.write(0);
+      Wire.endTransmission();
+      Wire.beginTransmission(6); //device #6
       Wire.write(0);
       Wire.endTransmission();
       //analogWrite(slavePinIn, 0); //sends stop servo message to arduino board
@@ -96,4 +105,19 @@ void loop(){
   }
 }
 
+//check section
+//a section will be a defined set of PIR sensor settings.
+//will check all sensors and return an array of integers that correspond to the sections that should be expanded
+int checkSensors () {
+  //int sections[] = {};
+  if(digitalRead(pirPin) == HIGH && digitalRead(pirPin2) == LOW){
+    //sections.add();
+    return 8;
+  } else if (digitalRead(pirPin) == LOW && digitalRead(pirPin2) == HIGH) {
+    return 7;
+  } else if (digitalRead(pirPin) == HIGH && digitalRead(pirPin2) == HIGH) {
+    return 6;
+  }
+  
+}
 
