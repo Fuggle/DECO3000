@@ -18,7 +18,7 @@ int ledPin = 4;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Wire.begin(2); // receive device #2 messages
+  Wire.begin(6); // receive device # message
   Wire.onReceive(receiveEvent);
   servo1.attach(9);
   servo2.attach(8);
@@ -58,7 +58,7 @@ if (!isExpanding && !isCollapsing && !fullyExpanded) {
     servo1.write(pos);  
     servo2.write(pos);
     servo3.write(pos);
-    delay(200);
+    delay(80);
   }
   if (pos >= 170) {
     fullyExpanded = true;
@@ -79,7 +79,7 @@ if (!isExpanding && !isCollapsing && !fullyCollapsed) {
     servo1.write(pos);  
     servo2.write(pos);
     servo3.write(pos);
-    delay(200);
+    delay(80);
   }
   if (pos <= 10) {
     fullyCollapsed = true;
