@@ -4,6 +4,7 @@ using System.Collections;
 public class NodeTouch : MonoBehaviour {
 
 	NodeController nodeController;
+	float scaleFactor = 1.01f;
 
 	void Start () {
 		nodeController = GetComponent<NodeController> ();
@@ -23,7 +24,7 @@ public class NodeTouch : MonoBehaviour {
 					GameObject node = hit.collider.gameObject;
 					Node nodeScript = node.GetComponent<Node>();
 					nodeScript.nodeTouched();
-					nodeScript.nodeHover();
+					nodeScript.nodeHover(scaleFactor);
 				} else{
 					nodeController.createNode(hit.point);
 				}

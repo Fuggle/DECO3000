@@ -8,9 +8,10 @@ public class Node : MonoBehaviour {
 	NodeController nodeController;
 	List<GameObject> nodeList;
 	float scaleAmount = 1.01f;
-	float decayAmount = 0.9995f;
-	public float maxScale = 4;
-	float minScale = 0.2f;
+	float decayAmount = 0.9990f;
+	public float maxScale = 12;
+	float minScale = 1f;
+	int passNum = 0;
 
 	void Start () 
 	{
@@ -27,7 +28,7 @@ public class Node : MonoBehaviour {
 		slowDecay ();
 	}
 
-
+	/*
 	public void lineConnection()
 	{
 		print ("NodeCount: " + nodeList.Count);
@@ -38,7 +39,7 @@ public class Node : MonoBehaviour {
 				lineRenderer.SetPosition (1, nodeList [i + 1].transform.position);
 			}
 		}
-	}
+	}*/
 
 	/// <summary>
 	/// When the node is touched change color.
@@ -47,7 +48,6 @@ public class Node : MonoBehaviour {
 	{
 		Renderer nodeRenderer = GetComponent<Renderer>();
 		nodeRenderer.material.color = Color.blue;
-		lineConnection ();
 	}
 
 	/// <summary>
@@ -55,12 +55,21 @@ public class Node : MonoBehaviour {
 	/// </summary>
 	public void nodeHover()
 	{
-		transform.localScale = new Vector3 
-			(transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, transform.localScale.z * scaleAmount);
-
 		if (transform.localScale.magnitude > maxScale) {
-			lineConnection();
-			nodeController.TriggerEvent(this.gameObject.transform);
+			nodeController.TriggerEvent (this.gameObject.transform);
+		} else {
+			transform.localScale = new Vector3 
+				(transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, transform.localScale.z * scaleAmount);
+		}
+	}
+
+	public void nodeHover(float scaleAmount)
+	{
+		if (transform.localScale.magnitude > maxScale) {
+			nodeController.TriggerEvent (this.gameObject.transform);
+		} else {
+			transform.localScale = new Vector3 
+				(transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, transform.localScale.z * scaleAmount);
 		}
 	}
 
@@ -83,5 +92,11 @@ public class Node : MonoBehaviour {
 	void destroyNode()
 	{
 		Destroy (this.gameObject);
+	}
+
+	public void reinforcePath(){
+		passNum ++;
+		decayAmount = decayAmount + ((1-decayAmount)/1.25f); 
+
 	}
 }

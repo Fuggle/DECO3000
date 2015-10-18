@@ -98,7 +98,8 @@ public class NodeController : MonoBehaviour {
 			
 			foreach (GameObject aNode in nodeList) {
 				float distance = Vector3.Distance (aNode.transform.position, centralNode.transform.position);
-				if (distance < triggeredNodeDistance) {
+				float nodeDistance = Vector3.Distance(aNode.transform.position, triggeredNode.position);
+				if (distance < triggeredNodeDistance && nodeDistance < triggeredNodeDistance) {
 					temporaryNodelist.Add (aNode.transform);
 					temporaryDistanceList.Add (Vector3.Distance (aNode.transform.position, centralNode.transform.position));
 				}
