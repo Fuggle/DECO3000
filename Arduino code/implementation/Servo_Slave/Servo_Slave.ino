@@ -5,6 +5,7 @@
 
 Servo servo1, servo2, servo3; //servo objects
 
+int deviceNo = 4; // CHANGE THIS PER DEVICE (count down from 8)
 int pos = 10; //track servo position globally.
 bool isExpanding = false;
 boolean isCollapsing = false;
@@ -14,11 +15,11 @@ boolean fullyCollapsed = false;
 //int masterPinIn = 4; //input to master
 //int masterPinOut = 5; //output from master
 int sensorState = 0;
-int ledPin = 4;
+int ledPin = 10;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Wire.begin(6); // receive device # message
+  Wire.begin(deviceNo); // receive device # message
   Wire.onReceive(receiveEvent);
   servo1.attach(9);
   servo2.attach(8);
