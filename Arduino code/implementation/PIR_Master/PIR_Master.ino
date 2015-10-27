@@ -73,16 +73,7 @@ void setup(){
 void loop(){
 
   if(digitalRead(pirPin) == HIGH || digitalRead(pirPin2) == HIGH || digitalRead(pirPin3) == HIGH || digitalRead(pirPin4) == HIGH){  
-    Wire.beginTransmission(checkSensors()); //device
-    Wire.write(1);
-    Wire.endTransmission();
-    /*Wire.beginTransmission(7); //device #2
-    Wire.write(1);
-    Wire.endTransmission();
-    Wire.beginTransmission(6); //device #2
-    Wire.write(1);
-    Wire.endTransmission();*/
-    //analogWrite(slavePinIn, 255); //sends start servo message to slave arduino
+    checkSections();
     
     if(lockLow1){ 
       //makes sure we wait for a transition to LOW before further output is made
@@ -126,23 +117,10 @@ void loop(){
     takeLow4Time = true;
   }
 
-  if(digitalRead(pirPin) == LOW || digitalRead(pirPin2) == LOW || digitalRead(pirPin3) == LOW || digitalRead(pirPin4) == LOW){      
-
+  if(digitalRead(pirPin) == LOW){      
     if(takeLow1Time){
       lowIn1 = millis();             //save the time of the transition from HIGH to LOW
       takeLow1Time = false;    //make sure this is only done at the start of a LOW phase
-    }
-    if(takeLow2Time){
-      lowIn2 = millis();             //save the time of the transition from HIGH to LOW
-      takeLow2Time = false;    //make sure this is only done at the start of a LOW phase
-    }
-    if(takeLow3Time){
-      lowIn3 = millis();             //save the time of the transition from HIGH to LOW
-      takeLow3Time = false;    //make sure this is only done at the start of a LOW phase
-    }
-    if(takeLow4Time){
-      lowIn4 = millis();             //save the time of the transition from HIGH to LOW
-      takeLow4Time = false;    //make sure this is only done at the start of a LOW phase
     }
    
     //if the sensor is low for more than the given pause,
@@ -150,74 +128,164 @@ void loop(){
     if(!lockLow1 && millis() - lowIn1 > pause){
       //makes sure this block of code is only executed again after
       //a new motion sequence has been detected
-      Wire.beginTransmission(checkLowSensors()); //device #8
-      Wire.write(0);
-      Wire.endTransmission();
+      checkSections();
       lockLow1 = true;                       
       Serial.print("sensor 1 motion ended at "); //output
       Serial.print((millis() - pause)/1000);
       Serial.println(" sec");
       delay(50);
     }
+  }
+  
+  if(digitalRead(pirPin2) == LOW){      
+    if(takeLow2Time){
+      lowIn2 = millis();             //save the time of the transition from HIGH to LOW
+      takeLow2Time = false;    //make sure this is only done at the start of a LOW phase
+    }
+   
+    //if the sensor is low for more than the given pause,
+    //we can assume the motion has stopped
     if(!lockLow2 && millis() - lowIn2 > pause){
       //makes sure this block of code is only executed again after
       //a new motion sequence has been detected
-      Wire.beginTransmission(checkLowSensors()); //device #8
-      Wire.write(0);
-      Wire.endTransmission();
+      checkSections();
       lockLow2 = true;                       
       Serial.print("sensor 2 motion ended at "); //output
       Serial.print((millis() - pause)/1000);
       Serial.println(" sec");
       delay(50);
+    } 
+  }
+
+  if(digitalRead(pirPin3) == LOW){      
+    if(takeLow3Time){
+      lowIn3 = millis();             //save the time of the transition from HIGH to LOW
+      takeLow3Time = false;    //make sure this is only done at the start of a LOW phase
     }
+   
+    //if the sensor is low for more than the given pause,
+    //we can assume the motion has stopped
     if(!lockLow3 && millis() - lowIn3 > pause){
       //makes sure this block of code is only executed again after
       //a new motion sequence has been detected
-      Wire.beginTransmission(checkLowSensors()); //device #8
-      Wire.write(0);
-      Wire.endTransmission();
+      checkSections();
       lockLow3 = true;                       
       Serial.print("sensor 3 motion ended at "); //output
       Serial.print((millis() - pause)/1000);
       Serial.println(" sec");
       delay(50);
+    } 
+  }
+
+  if(digitalRead(pirPin4) == LOW){      
+    if(takeLow4Time){
+      lowIn4 = millis();             //save the time of the transition from HIGH to LOW
+      takeLow4Time = false;    //make sure this is only done at the start of a LOW phase
     }
+   
+    //if the sensor is low for more than the given pause,
+    //we can assume the motion has stopped
     if(!lockLow4 && millis() - lowIn4 > pause){
       //makes sure this block of code is only executed again after
       //a new motion sequence has been detected
-      Wire.beginTransmission(checkLowSensors()); //device #8
-      Wire.write(0);
-      Wire.endTransmission();
+      checkSections();
       lockLow4 = true;                       
       Serial.print("sensor 4 motion ended at "); //output
       Serial.print((millis() - pause)/1000);
       Serial.println(" sec");
       delay(50);
-    }
-    
+    } 
   }
+  
+  
 }
 
 //check section
 //a section will be a defined set of PIR sensor settings.
 //will check all sensors and return an array of integers that correspond to the sections that should be expanded
-int checkSensors () {
-  if(digitalRead(pirPin) == HIGH && digitalRead(pirPin2) == HIGH){
-    //sections[sizeof(sections)] = 6;
-    return 6;
-  } else if (digitalRead(pirPin2) == HIGH) {
-    //sections[sizeof(sections)] = 7;
-    return 7;
-  } else if (digitalRead(pirPin) == HIGH) {
-    //sections[sizeof(sections)] = 8;
-    return 8;
-  } else if (digitalRead(pirPin3) == HIGH) {
-    return 5;  
-  } else if (digitalRead(pirPin4) == HIGH) {
-    return 4;
+void checkSections () {
+
+  if (checkSectionOne()) {
+    //write 1 to section 2
+    Wire.beginTransmission(8); 
+    Wire.write(1);
+    Wire.endTransmission();
+  } else {
+    //write 0 to section 1
+    Wire.beginTransmission(8);
+    Wire.write(0);
+    Wire.endTransmission();
   }
+
+  if (checkSectionTwo()) {
+    //write 1 to section 2
+    Wire.beginTransmission(7);
+    Wire.write(1);
+    Wire.endTransmission();
+  } else {
+    //write 0 to section 1
+    Wire.beginTransmission(7);
+    Wire.write(0);
+    Wire.endTransmission();
+  }
+
+  if (checkSectionThree()) {
+    //write 1 to section 2
+    Wire.beginTransmission(6);
+    Wire.write(1);
+    Wire.endTransmission();
+  } else {
+    //write 0 to section 1
+    Wire.beginTransmission(6);
+    Wire.write(0);
+    Wire.endTransmission();
+  }
+
+  if (checkSectionFour()) {
+    //write 1 to section 2
+    Wire.beginTransmission(5);
+    Wire.write(1);
+    Wire.endTransmission();
+  } else {
+    //write 0 to section 1
+    Wire.beginTransmission(5);
+    Wire.write(0);
+    Wire.endTransmission();
+  }
+
+  
+  
 }
+
+//checkSections
+//check each section's set of possible active states.
+boolean checkSectionOne () {
+  if(digitalRead(pirPin) == HIGH){
+    return true;
+  }
+  return false;
+}
+
+boolean checkSectionTwo () {
+  if (digitalRead(pirPin2) == HIGH) {
+    return true;
+  } 
+  return false;
+}
+
+boolean checkSectionThree () {
+  if (digitalRead(pirPin3) == HIGH) {
+    return true;
+  } 
+  return false;
+}
+boolean checkSectionFour () {
+  if (digitalRead(pirPin4) == HIGH) {
+    return true;
+  } 
+  return false;
+}
+
 
 //checks which sensors are low and returns which boards should start collapsing
 int checkLowSensors () {

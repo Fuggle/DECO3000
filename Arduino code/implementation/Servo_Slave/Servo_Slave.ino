@@ -5,7 +5,7 @@
 
 Servo servo1, servo2, servo3; //servo objects
 
-int deviceNo = 4; // CHANGE THIS PER DEVICE (count down from 8)
+int deviceNo = 8; // CHANGE THIS PER DEVICE (count down from 8)
 int pos = 10; //track servo position globally.
 bool isExpanding = false;
 boolean isCollapsing = false;
