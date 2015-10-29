@@ -13,8 +13,10 @@ public class SmoothManager : MonoBehaviour {
 	public GameObject depthManager;
 	private DepthManager _depthManager;
 
+	//The depth data after the smoothing process
 	private ushort[] result;
 
+	//The set of depth data used to smooth out
 	private ushort[,]buffer;
 
 	private int formatLength;
@@ -40,12 +42,12 @@ public class SmoothManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//When the depth information is reading, start adding frames to the buffer
 		if (_depthManager.IsReading () == true) {
-
 			AddFrame ();
 		}
 
-		//When space is pressed write current data into a file
+		//When space is pressed write current smoothed out depth data into a file
 		if (Input.GetKeyDown(KeyCode.S))
 		{
 			print("S key is pressed");
