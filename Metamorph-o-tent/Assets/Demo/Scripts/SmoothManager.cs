@@ -19,7 +19,9 @@ public class SmoothManager : MonoBehaviour {
 	//The set of depth data used to smooth out
 	private ushort[,]buffer;
 
+	//Number of pixels in kinect depth capture
 	private int formatLength;
+
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +38,7 @@ public class SmoothManager : MonoBehaviour {
 		result = new ushort[formatLength];
 
 		//Display the resolution
-		print ("format length is:");
+		print ("Current depth format length is:");
 		print(formatLength);
 	}
 	
@@ -51,6 +53,7 @@ public class SmoothManager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.S))
 		{
 			print("S key is pressed");
+			print("A smoothed out snapshot is stored");
 			if(formatLength != 0)
 			{
 				NewAverage();

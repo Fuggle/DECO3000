@@ -1,19 +1,3 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-6648
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-7276
 Cmd: getPlatforms
-Cmd: preprocess
-  insize=639 outsize=636 ok=1
-Cmd: preprocess
-  insize=782 outsize=779 ok=1
-Cmd: preprocess
-  insize=1493 outsize=147 ok=1
-Cmd: compileSnippet
-  error: 2 plat 4 at (0): Fragment program 'frag': sampler 'SampleType' has no matching texture and will be undefined.
-\nCompiling Fragment program
-  api=4 type=1 insize=1643 outsize=0 kw= pd= ok=0
-Cmd: preprocess
-  insize=464 outsize=461 ok=1
-Cmd: preprocess
-  insize=279 outsize=276 ok=1
-Cmd: preprocess
-  insize=606 outsize=603 ok=1
