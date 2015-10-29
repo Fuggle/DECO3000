@@ -70,7 +70,9 @@ public class NodeController : MonoBehaviour {
 	
 		if (nodeHitList.Length == 1 ) {
 			//creates node and adds to 'nodeList'
-			nodeList.Add((GameObject)Instantiate (node, touchLocation , transform.rotation));
+			GameObject currentNode = (GameObject)Instantiate (node, touchLocation , transform.rotation);
+			currentNode.transform.LookAt(Camera.main.transform.position);
+			nodeList.Add(currentNode);
 			return;
 		}
 

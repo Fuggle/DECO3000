@@ -1,10 +1,10 @@
-int incomingByte = 0;
+int ledPin = 10;
 
 void setup() {
+  pinMode(ledPin, OUTPUT);
+  
   // put your setup code here, to run once:
   Serial.begin(9600);
-
-  Serial.write(2);
 }
 
 void loop() {
@@ -12,11 +12,18 @@ void loop() {
   //Receiving value
   if (Serial.available() > 0) {
      // read the incoming byte:
-     incomingByte = Serial.read();
+      char incomingByte = Serial.read();
 
-     // say what you got:
-     Serial.print("I received: ");
-     Serial.println(incomingByte, DEC);
+     char on = '1';
+     char off = '0';
+     if (incomingByte == on) {
+      digitalWrite(ledPin, HIGH);
+      Serial.print("LED ON");
+     } else if (incomingByte == off) {
+      digitalWrite(ledPin, LOW);
+      Serial.print("LED OFF");
+     }
   }
-
+  Serial.flush();
+  delay(50);
 }
