@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57919f5765bca42e6b783f7b51e7530b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundLayer: {fileID: 8300000, guid: 29f1eb33eb19d48ae89951c295fc5023, type: 3}
+  soundLayer: {fileID: 0}
 --- !u!114 &1038160409
 MonoBehaviour:
   m_ObjectHideFlags: 0
