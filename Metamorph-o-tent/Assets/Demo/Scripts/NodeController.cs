@@ -47,6 +47,10 @@ public class NodeController : MonoBehaviour {
 
 				if(Vector3.Distance(travelNode.position, destination) < 1){
 					if(pathCounter == nodePathList.Count - 1){
+						
+						// play a sound when you reach the central node
+						Camera.main.GetComponent<SoundManager>().playLayer(6);
+
 						print ("made it to the central node!!!!");
 						movingNode = false;
 						eventTriggered = false;
@@ -91,6 +95,9 @@ public class NodeController : MonoBehaviour {
 		if (!eventTriggered) {
 			eventTriggered = true;
 			print ("TriggerEvent!!");
+
+			// sond that gets played when the node event is triggered
+			Camera.main.GetComponent<SoundManager>().playLayer(3);
 
 			float triggeredNodeDistance = Vector3.Distance (centralNode.transform.position, triggeredNode.position);
 			List<Transform> temporaryNodelist = new List<Transform> ();

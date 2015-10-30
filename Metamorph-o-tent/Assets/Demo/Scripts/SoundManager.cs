@@ -5,16 +5,18 @@ public class SoundManager : MonoBehaviour {
 
 	public AudioClip soundLayer; //soundlayer 
 	AudioSource bgm;
+	public AudioClip[] layers;
 
 	// Use this for initialization
 	void Start () {
-
+		//playLayer (1);
+		//playLayer (0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//some key binds for testing functions
-		/*if (Input.GetKeyDown ("v")) {
+		if (Input.GetKeyDown ("v")) {
 			Debug.Log("pressed v");
 			StartCoroutine(raiseVolume(1f));
 		};
@@ -24,7 +26,10 @@ public class SoundManager : MonoBehaviour {
 		};
 		if (Input.GetKeyDown("l")){
 			addLayer();
-		};*/
+		};
+		if (Input.GetKeyDown("j")){
+			playLayer(2);
+		};
 
 	}
 
@@ -98,6 +103,17 @@ public class SoundManager : MonoBehaviour {
 		}
 
 		Debug.Log (bgm.volume);
+	}
+
+	/// <summary>
+	/// Plays the sound from the list of sounds at the given index.
+	/// </summary>
+	/// <param name="layerIndex">Layer index.</param>
+	public void playLayer(int layerIndex) {
+		GameObject soundSource = new GameObject();
+		soundSource.AddComponent<AudioSource>();
+		AudioSource sfx = soundSource.GetComponent<AudioSource>();
+		sfx.PlayOneShot(layers[layerIndex], 1);
 	}
 
 	//Add a new sound

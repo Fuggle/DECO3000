@@ -290,7 +290,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b271501b926de469d9152dadd645b30f, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -363,6 +363,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundLayer: {fileID: 0}
+  layers:
+  - {fileID: 8300000, guid: b271501b926de469d9152dadd645b30f, type: 3}
+  - {fileID: 8300000, guid: 29f1eb33eb19d48ae89951c295fc5023, type: 3}
+  - {fileID: 8300000, guid: 54c4922c7a16246929d771ceb24358be, type: 3}
 --- !u!114 &1038160409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothManager: {fileID: 490114588}
   startDelay: 0
-  detechRate: 0
+  bufferSize: 0
 --- !u!4 &1159734992
 Transform:
   m_ObjectHideFlags: 0
