@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour {
 
 	public AudioClip soundLayer; //soundlayer 
 	AudioSource bgm;
+
 	public AudioClip[] layers;
+	private Dictionary<string, AudioClip> sortedLayers;
 
 	// Use this for initialization
 	void Start () {
-		//playLayer (1);
-		//playLayer (0);
+
+		//set up sortedLayers
+		sortedLayers = new Dictionary<string, AudioClip> ();
+		foreach (AudioClip layer in layers) {
+			sortedLayers.Add(layer.name, layer);
+		}
 	}
 	
 	// Update is called once per frame
@@ -28,7 +35,7 @@ public class SoundManager : MonoBehaviour {
 			addLayer();
 		};
 		if (Input.GetKeyDown("j")){
-			playLayer(2);
+			//playLayer(2);
 		};
 
 	}
@@ -106,14 +113,20 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Plays the sound from the list of sounds at the given index.
+	/// Plays the sound specified in the soundName with the desired paramaters.
 	/// </summary>
-	/// <param name="layerIndex">Layer index.</param>
-	public void playLayer(int layerIndex) {
+	/// <param name="soundName">Sound name.</param>
+	/// <param name="volume">Volume.</param>
+	/// <param name="repeat">Repeat.</param>
+	public void playLayer(string soundName, float volume, int repeat) {
 		GameObject soundSource = new GameObject();
 		soundSource.AddComponent<AudioSource>();
 		AudioSource sfx = soundSource.GetComponent<AudioSource>();
-		sfx.PlayOneShot(layers[layerIndex], 1);
+		sfx.volume = volume;
+		print ("sorted layers: " + sortedLayers);
+		sfx.PlayOneShot(sortedLayers[soundName], repeat);
+
+
 	}
 
 	//Add a new sound
