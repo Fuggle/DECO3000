@@ -29,10 +29,7 @@ GameObject:
   - 33: {fileID: 3336498}
   - 135: {fileID: 13505760}
   - 23: {fileID: 2394234}
-  - 120: {fileID: 12028670}
-  - 122: {fileID: 12245948}
   - 114: {fileID: 11454102}
-  - 191: {fileID: 19190904}
   m_Layer: 0
   m_Name: Node
   m_TagString: Node
@@ -925,54 +922,6 @@ MonoBehaviour:
   simulationStarted: 31.4099674
   loopExceeded: 0
   loopExceededOnParticle: -1
---- !u!120 &12028670
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175978}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: .239999995
-    endWidth: .25
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
---- !u!122 &12245948
-Halo:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175978}
-  m_Enabled: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294442805
-  m_Size: 1.29999995
 --- !u!135 &13505760
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -985,21 +934,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!191 &19190904
-OffMeshLink:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175978}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_AreaIndex: 0
-  m_Start: {fileID: 476612}
-  m_End: {fileID: 0}
-  m_CostOverride: -1
-  m_BiDirectional: 1
-  m_Activated: 1
-  m_AutoUpdatePositions: 0
 --- !u!198 &19844658
 ParticleSystem:
   m_ObjectHideFlags: 1
