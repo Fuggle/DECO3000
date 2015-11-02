@@ -65,10 +65,11 @@ public class NodeController : MonoBehaviour {
 
 	public void createNode(Vector3 touchLocation)
 	{
-
+		print ("Touch Location: " + touchLocation);
 		Collider[] nodeHitList = Physics.OverlapSphere (touchLocation, checkRadius);
 	
-		if (nodeHitList.Length == 1 ) {
+		if (nodeHitList.Length == 0) {
+			print ("Make node");
 			//creates node and adds to 'nodeList'
 			GameObject currentNode = (GameObject)Instantiate (node, touchLocation , transform.rotation);
 			currentNode.transform.LookAt(Camera.main.transform.position);
@@ -78,6 +79,7 @@ public class NodeController : MonoBehaviour {
 
 		foreach (Collider nodes in nodeHitList) {
 			if(nodes.tag == "Node"){
+				print ("Make node bigger");
 				Node nodeScript = nodes.gameObject.GetComponent<Node>();
 				nodeScript.nodeHover();
 			}
