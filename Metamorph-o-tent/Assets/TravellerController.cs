@@ -16,6 +16,7 @@ public class TravellerController : MonoBehaviour {
 	void OnTriggerExit(Collider col){
 		if (col.tag == "Node") {
 			col.gameObject.GetComponent<Node>().reinforcePath();
+			Camera.main.GetComponent<SoundManager>().playLayer("Bell2-Reversed", 0.5f, 1);
 		}
 	}
 }
