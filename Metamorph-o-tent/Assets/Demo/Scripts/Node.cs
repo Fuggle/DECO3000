@@ -26,12 +26,16 @@ public class Node : MonoBehaviour {
 	//The Time.time value when we started the interpolation
 	private float timeStartedScaling;
 
+//	private ParticlePlayground playgroundController; 
 
 	void Start () 
 	{
 		nodeController = Camera.main.GetComponent<NodeController> ();
 		nodeList = nodeController.nodeList;
 		print (transform.localScale.magnitude);
+
+		//playergroundController = this.GetComponent<ParticlePlayground> ();
+
 	}
 	
 
