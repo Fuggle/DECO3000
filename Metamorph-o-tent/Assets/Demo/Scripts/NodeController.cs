@@ -30,7 +30,7 @@ public class NodeController : MonoBehaviour {
 
 	void Update(){
 
-		if (movingNode && nodePathList.Count > 0) {	
+		if (movingNode && nodePathList.Count > 1) {	
 
 				//increment timer once per frame
 				currentLerpTime += Time.deltaTime;
@@ -73,7 +73,7 @@ public class NodeController : MonoBehaviour {
 		Collider[] nodeHitList = Physics.OverlapSphere (touchLocation, checkRadius);
 
 		print ("NodeHitList size: " + nodeHitList.Length);
-		if (nodeHitList.Length == 1) {
+		if (nodeHitList.Length == 0) {
 			print ("Make node");
 			//creates node and adds to 'nodeList'
 			GameObject currentNode = (GameObject)Instantiate (node, touchLocation , transform.rotation);
