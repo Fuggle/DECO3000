@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using ParticlePlayground; 
 
 public class Node : MonoBehaviour {
 	
@@ -9,9 +10,10 @@ public class Node : MonoBehaviour {
 	float scaleAmount = 1.5f;
 	float decayAmount = 0.9990f;
 	public float maxScale = 12;
+	float currentScale;
 	float minScale = 1f;
 	int passNum = 0;
-
+	public float sizePercentage;
 	float timer = 0;
 	bool scaleNode;
 
@@ -26,15 +28,27 @@ public class Node : MonoBehaviour {
 	//The Time.time value when we started the interpolation
 	private float timeStartedScaling;
 
+	public PlaygroundParticlesC ringParticles;
+	float ringMinStrength = 0f;
+	float ringMaxStrength = 100f;
+
+	public PlaygroundParticlesC coreParticles;
+	float minParticleSize = 0.2f;
+	float maxParticleSize = 2.6f;
+
+	public float currentParticleSize;
+
+	public float currentTurbulence;
+
 //	private ParticlePlayground playgroundController; 
 
 	void Start () 
 	{
 		nodeController = Camera.main.GetComponent<NodeController> ();
 		nodeList = nodeController.nodeList;
-		print (transform.localScale.magnitude);
-
-		//playergroundController = this.GetComponent<ParticlePlayground> ();
+	
+		//particles = this.GetComponent<ParticlePlayground> ();
+		ringParticles.turbulenceStrength = 52;
 
 	}
 	
@@ -59,6 +73,15 @@ public class Node : MonoBehaviour {
 			}
 		}
 
+		currentScale = transform.localScale.magnitude;
+
+		sizePercentage = (1 - (maxScale - currentScale) / (maxScale - minScale)) + 0.3f;
+
+		currentParticleSize = minParticleSize + ((maxParticleSize - minParticleSize) * sizePercentage);
+		coreParticles.scale = currentParticleSize;
+
+		currentTurbulence = ringMaxStrength - ((ringMaxStrength - ringMinStrength) * sizePercentage);
+		ringParticles.turbulenceStrength = currentTurbulence;
 
 	}
 	 

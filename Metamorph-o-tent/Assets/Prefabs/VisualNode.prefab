@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 199896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.8779011, y: 10.8599997, z: 90}
+  m_LocalPosition: {x: -.0281343684, y: 4.58900438e-08, z: -.256635725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 443740}
@@ -142,7 +142,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -178,7 +178,7 @@ MonoBehaviour:
   nearestNeighborOrigin: 0
   nearestNeighborOriginVector3: {x: 0, y: 0, z: 0}
   nearestNeighborOriginTransform: {fileID: 0}
-  particleCount: 5694
+  particleCount: 200
   emissionRate: 1
   overflowMode: 0
   overflowOffset: {x: 0, y: 0, z: 0}
@@ -1364,11 +1364,11 @@ MonoBehaviour:
       m_Bits: 4294967295
     transform:
       transform: {fileID: 468168}
-      instanceID: -6865062
+      instanceID: -8962762
       available: 1
-      position: {x: 17.8779011, y: 11.1099997, z: 90}
+      position: {x: -.0281343684, y: .25000006, z: -.256635725}
       localPosition: {x: 0, y: .25, z: 0}
-      previousPosition: {x: 17.8779011, y: 11.1099997, z: 90}
+      previousPosition: {x: -.0281343684, y: .25000006, z: -.256635725}
       forward: {x: 0, y: 0, z: 1}
       up: {x: 0, y: 1, z: 0}
       right: {x: 1, y: 0, z: 0}
@@ -1403,7 +1403,7 @@ MonoBehaviour:
     strengthDistanceEffect: .569000006
     enabled: 1
     inverseBounds: 0
-    manipulatorId: -6865062
+    manipulatorId: -8962762
     applyLifetimeFilter: 0
     lifetimeFilterMinimum: 0
     lifetimeFilterMaximum: 1
@@ -1539,14 +1539,14 @@ MonoBehaviour:
   timeOfSnapshot: 0
   isSnapshot: 0
   shurikenParticleSystem: {fileID: 19813932}
-  particleSystemId: 1
+  particleSystemId: 2
   particleSystemGameObject: {fileID: 166950}
   particleSystemTransform: {fileID: 443740}
   particleSystemRenderer: {fileID: 19906056}
   particleSystemRenderer2: {fileID: 19906056}
   eventControlledBy: []
   turbulenceType: 1
-  turbulenceStrength: 12.8000002
+  turbulenceStrength: 13.8999996
   turbulenceScale: .620000005
   turbulenceTimeScale: .430000007
   turbulenceApplyLifetimeStrength: 0
@@ -1555,15 +1555,15 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 16
   particleTimescale: 1
-  localTime: 199.853165
-  localDeltaTime: .0345611572
+  localTime: 0
+  localDeltaTime: 1115.98401
   previousActiveState: 0
-  simulationStarted: 198.485855
+  simulationStarted: .100000001
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!114 &11435090
@@ -1578,7 +1578,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxScale: 12
+  sizePercentage: 0
   timeOfScale: 3
+  ringParticles: {fileID: 11408534}
+  coreParticles: {fileID: 11487364}
+  currentParticleSize: 0
+  currentTurbulence: 0
 --- !u!114 &11456562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1623,15 +1628,15 @@ MonoBehaviour:
     e00: 1
     e01: 0
     e02: 0
-    e03: 17.8779011
+    e03: -.0281343684
     e10: 0
-    e11: 1
-    e12: 0
-    e13: 10.8599997
+    e11: -1.1920929e-07
+    e12: -.99999994
+    e13: 4.58900438e-08
     e20: 0
-    e21: 0
-    e22: 1
-    e23: 90
+    e21: .99999994
+    e22: -1.1920929e-07
+    e23: -.256635725
     e30: 0
     e31: 0
     e32: 0
@@ -13606,10 +13611,10 @@ MonoBehaviour:
   sourceTransform: {fileID: 440958}
   sourceTransforms:
   - transform: {fileID: 440958}
-    instanceID: 14680
+    instanceID: -8962740
     available: 1
-    position: {x: 0, y: -2.38418579e-07, z: 0}
-    localPosition: {x: 0, y: -2.38418579e-07, z: 0}
+    position: {x: 0, y: 0, z: 0}
+    localPosition: {x: 0, y: 0, z: 0}
     previousPosition: {x: 0, y: -2.38418579e-07, z: 0}
     forward: {x: 0, y: 0, z: 1}
     up: {x: 0, y: 1, z: 0}
@@ -13625,7 +13630,7 @@ MonoBehaviour:
       e10: 0
       e11: 1
       e12: 0
-      e13: -2.38418579e-07
+      e13: 0
       e20: 0
       e21: 0
       e22: 1
@@ -13754,7 +13759,7 @@ MonoBehaviour:
   timeOfSnapshot: 0
   isSnapshot: 0
   shurikenParticleSystem: {fileID: 19851238}
-  particleSystemId: 5
+  particleSystemId: 1
   particleSystemGameObject: {fileID: 167800}
   particleSystemTransform: {fileID: 440958}
   particleSystemRenderer: {fileID: 19906490}
@@ -13780,15 +13785,15 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  isReadyForThreadedCalculations: 1
+  isReadyForThreadedCalculations: 0
   prewarm: 0
   prewarmTime: 1
   prewarmCycles: 20
   particleTimescale: 1
-  localTime: 199.853165
-  localDeltaTime: .0345611572
+  localTime: 0
+  localDeltaTime: 1115.87659
   previousActiveState: 0
-  simulationStarted: 198.485855
+  simulationStarted: .100000001
   loopExceeded: 0
   loopExceededOnParticle: -1
 --- !u!135 &13574996

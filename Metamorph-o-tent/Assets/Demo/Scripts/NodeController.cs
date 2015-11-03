@@ -30,7 +30,7 @@ public class NodeController : MonoBehaviour {
 
 	void Update(){
 
-		if (movingNode && nodePathList.Count > 0) {	
+		if (movingNode && nodePathList.Count > 1) {	
 
 				//increment timer once per frame
 				currentLerpTime += Time.deltaTime;

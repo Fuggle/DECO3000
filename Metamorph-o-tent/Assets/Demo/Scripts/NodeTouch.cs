@@ -19,15 +19,15 @@ public class NodeTouch : MonoBehaviour {
 			//checks to see if ray is hitting existing node
 			if (Input.GetMouseButtonDown (0)) {
 			
-				if(hit.collider.gameObject.tag == "Node"){
+				/*if(hit.collider.gameObject.tag == "Node"){
 					print ("hit node directly");
 					GameObject node = hit.collider.gameObject;
 					Node nodeScript = node.GetComponent<Node>();
 					nodeScript.nodeTouched();
 					nodeScript.nodeHover(scaleFactor);
-				} else{
+				} else{*/
 					nodeController.createNode(hit.point);
-				}
+				//}
 				
 			} 
 			/*
