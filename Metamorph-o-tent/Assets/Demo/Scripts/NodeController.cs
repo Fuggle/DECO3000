@@ -11,7 +11,7 @@ public class NodeController : MonoBehaviour {
 	public List<GameObject> nodeList;
 
 	public List<Transform> nodePathList;
-	List<GameObject> nodeHitList;
+	public List<GameObject> nodeHitList;
 	public Transform travelNode;
 	int pathCounter = 0;
 
@@ -71,8 +71,9 @@ public class NodeController : MonoBehaviour {
 	{
 		print ("Touch Location: " + touchLocation);
 		Collider[] nodeHitList = Physics.OverlapSphere (touchLocation, checkRadius);
-	
-		if (nodeHitList.Length == 0) {
+
+		print ("NodeHitList size: " + nodeHitList.Length);
+		if (nodeHitList.Length == 1) {
 			print ("Make node");
 			//creates node and adds to 'nodeList'
 			GameObject currentNode = (GameObject)Instantiate (node, touchLocation , transform.rotation);

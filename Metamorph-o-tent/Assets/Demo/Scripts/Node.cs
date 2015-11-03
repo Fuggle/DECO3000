@@ -3,20 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Node : MonoBehaviour {
-
-	LineRenderer lineRenderer;
+	
 	NodeController nodeController;
 	List<GameObject> nodeList;
-	float scaleAmount = 1.01f;
+	float scaleAmount = 1.5f;
 	float decayAmount = 0.9990f;
 	public float maxScale = 12;
 	float minScale = 1f;
 	int passNum = 0;
 
+	float timer = 0;
+	bool scaleNode;
+
+	public float timeOfScale = 3f;
+	//Whether we are currently interpolating Scale or not
+	private bool isScaling;
+	
+	//The start and finish positions for the interpolation
+	private Vector3 startScale;
+	private Vector3 endScale;
+	
+	//The Time.time value when we started the interpolation
+	private float timeStartedScaling;
+
+
 	void Start () 
 	{
-		lineRenderer = GetComponent<LineRenderer> ();
-		lineRenderer.enabled = false;
 		nodeController = Camera.main.GetComponent<NodeController> ();
 		nodeList = nodeController.nodeList;
 		print (transform.localScale.magnitude);
@@ -26,20 +38,39 @@ public class Node : MonoBehaviour {
 	void Update () 
 	{
 		slowDecay ();
-	}
 
-	/*
-	public void lineConnection()
-	{
-		print ("NodeCount: " + nodeList.Count);
-		if (nodeList.Count > 1 ) {
-			for (int i = 0; i<nodeList.Count-1; i++) {
-				lineRenderer.enabled = true;
-				lineRenderer.SetPosition (0, nodeList [i].transform.position);
-				lineRenderer.SetPosition (1, nodeList [i + 1].transform.position);
+		if (isScaling) {
+			if (transform.localScale.magnitude > maxScale) {
+				nodeController.TriggerEvent (this.gameObject.transform);
+				return;
+			}
+
+			float timeSinceStarted = Time.time - timeStartedScaling;
+			float percentageComplete = timeSinceStarted / timeOfScale;
+
+			transform.localScale = Vector3.Lerp (startScale, endScale, percentageComplete);
+
+			if(percentageComplete >= 1.0f){
+				isScaling = false;
 			}
 		}
-	}*/
+
+
+	}
+	 
+	public Vector3 LerpScale(Vector3 start, Vector3 finish, float percentage)
+	{		
+		//Makes sure percentage is between 0 and 1.
+		percentage = Mathf.Clamp01(percentage);
+				
+		//The Vector3 scale between 'start' and 'finish'.
+		Vector3 startToFinish = finish - start;
+
+		//The remainder of scaling left.
+		return start + startToFinish * percentage;
+	}
+
+
 
 	/// <summary>
 	/// When the node is touched change color.
@@ -55,12 +86,22 @@ public class Node : MonoBehaviour {
 	/// </summary>
 	public void nodeHover()
 	{
+		isScaling = true;
+		timeStartedScaling = Time.time;
+				
+		//We set the start position to the current position, and the finish to 10 spaces in the 'forward' direction
+		startScale = transform.localScale;
+		endScale = new Vector3 (transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, 
+		                    transform.localScale.z * scaleAmount);
+
+		/*
+		scaleNode = true;
 		if (transform.localScale.magnitude > maxScale) {
 			nodeController.TriggerEvent (this.gameObject.transform);
 		} else {
 			transform.localScale = new Vector3 
 				(transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, transform.localScale.z * scaleAmount);
-		}
+		}*/
 	}
 
 	public void nodeHover(float scaleAmount)

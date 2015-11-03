@@ -17,7 +17,7 @@ public class NodeTouch : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
 			//checks to see if ray is hitting existing node
-			if (Input.GetMouseButton (0)) {
+			if (Input.GetMouseButtonDown (0)) {
 			
 				if(hit.collider.gameObject.tag == "Node"){
 					print ("hit node directly");
