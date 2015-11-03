@@ -110,6 +110,7 @@ public class SmoothManager : MonoBehaviour {
 
 	//new average is calculated
 	private void BetterAverage(){
+		int discarded = 0;
 		for (int j = 0; j <formatLength; j++) {
 			//Sum is the sum of all the depths in the buffer
 			int sum = 0;
@@ -133,13 +134,15 @@ public class SmoothManager : MonoBehaviour {
 			}
 
 			//An average of 0 will be given if the fluctation on this point is too much (more than 50mm)
-			if(max - min < 40){
+			if(max - min < 50){
 				result [j] = (ushort)(sum / delay);
 			}else{
+				discarded ++;
 				result [j] = 0;
 			}
 
 		}
+		Debug.Log ("discarded amount = " + discarded);
 	}
 
 	//new average is calculated
@@ -163,7 +166,7 @@ public class SmoothManager : MonoBehaviour {
 
 	public ushort[] GetData ()
 	{
-		NewAverage ();
+		BetterAverage ();
 		return result;
 	}
 }

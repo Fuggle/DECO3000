@@ -26,16 +26,24 @@ public class TouchManager : MonoBehaviour {
 	public int bufferSize;
 	private int formatLength;
 
+	//Key value - 
+	public int touchSensitivity;
+	public int touchRange;
 
+	//The external call to spawn the nodes
 	private NodeController _nodeController;
+	
 
 	// Use this for initialization
 	void Start () {
+
 		//Setting startin variable
 		startDelay = 600;
-		touchDelay = 30;
+		touchDelay = 50;
 		bufferSize = 50;
 		formatLength = 217088;
+		touchSensitivity = 200;
+		touchRange = 50;
 
 		//Setting up the smoothManager reference
 		_smoothManager = smoothManager.GetComponent<SmoothManager> ();
@@ -66,22 +74,59 @@ public class TouchManager : MonoBehaviour {
 	private void DetectTouch(){
 		int x = 0;
 		int y = 0;
+		List<int> touchLocation = new List<int> ();
+		List<int> touchStrength = new List<int> ();
+
+		//Finds all points where the current depth is much closer than the snapshot depth
 		for (int i = 0; i <formatLength; i++) {
 			x = i/512;
 			y = i%512;
-			if(baseFrame[i]+60 < (frame[i]) && baseFrame[i] != 0 && frame[i] != 0){
-				Debug.Log("base frame is:" + baseFrame[i]);
-				Debug.Log("current frame is:" + frame[i]);
-				Debug.Log("at index:" + i);
-				i = 222222;
-				Debug.Log("x is: " + x);
-				Debug.Log("y is: " + y);
-				Vector3 v3 = new Vector3(x/20, y/20, 12);
-				_nodeController.createNode (v3);
+			if((int)baseFrame[i] - (int)(frame[i]) > 50 && baseFrame[i] != 0 && frame[i] != 0){
+				//Debug.Log("base frame is:" + baseFrame[i]);
+				//Debug.Log("current frame is:" + frame[i]);
+				//Debug.Log("at index:" + i);
+				touchLocation.Add(i);
+				touchStrength.Add(baseFrame[i] - (frame[i]));
 			}
 		}
+		int[] locations = touchLocation.ToArray ();
+		int[] strength = touchStrength.ToArray ();
+
+		Array.Sort (strength, locations);
+		Debug.Log ("number of locations triggered = " + locations.Length);
+		Debug.Log ("number of strenght recorded = " + strength.Length);
+		Array.Reverse (strength);
+		Array.Reverse (locations);
+
+		//Finds a cluster of elevated points that denotes touch
+
+		int supportingPoints = 0;
+		for (int i = 0; i < strength.Length; i++) {
+			supportingPoints = 0;
+			for (int j = 0; j < locations.Length; j++){
+				int xDistance = (locations[j]-locations[i])/512;
+				int yDistance = (locations[j]-locations[i])%512;
+				if( touchRange > xDistance && xDistance> -touchRange &&
+				   touchRange > yDistance && yDistance > -touchRange){
+					supportingPoints ++;
+				}
+			}
+
+			if(supportingPoints > touchSensitivity){
+				TriggerTouch(locations[i]/512, locations[i]%512);
+				i = strength.Length;
+			}
+
+		}
+
 	}
 
+	private void TriggerTouch(int x, int y){
+		Debug.Log("x is: " + x);
+		Debug.Log("y is: " + y);
+		Vector3 v3 = new Vector3(x/20, y/20, 12);
+		_nodeController.createNode (v3);
+	}
 	
 	private bool Load(string fileName)
 	{
