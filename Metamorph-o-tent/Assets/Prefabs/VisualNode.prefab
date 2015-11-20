@@ -77,6 +77,7 @@ GameObject:
   - 4: {fileID: 408516}
   - 135: {fileID: 13574996}
   - 114: {fileID: 11435090}
+  - 114: {fileID: 11451432}
   m_Layer: 0
   m_Name: VisualNode
   m_TagString: Node
@@ -1577,13 +1578,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d9461343a9d2642a467a2a8e543f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScale: 12
   sizePercentage: 0
   timeOfScale: 3
   ringParticles: {fileID: 11408534}
   coreParticles: {fileID: 11487364}
   currentParticleSize: 0
   currentTurbulence: 0
+--- !u!114 &11451432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed3a2931d2d04ff3b4b85be1e0f30c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 2
 --- !u!114 &11456562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15992,7 +16004,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: spinSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 199896}

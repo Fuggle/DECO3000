@@ -38,7 +38,7 @@ public class TouchManager : MonoBehaviour {
 	void Start () {
 
 		//Setting startin variable
-		startDelay = 600;
+		startDelay = 300;
 		touchDelay = 50;
 		bufferSize = 50;
 		formatLength = 217088;
@@ -93,8 +93,8 @@ public class TouchManager : MonoBehaviour {
 		int[] strength = touchStrength.ToArray ();
 
 		Array.Sort (strength, locations);
-		Debug.Log ("number of locations triggered = " + locations.Length);
-		Debug.Log ("number of strenght recorded = " + strength.Length);
+		//Debug.Log ("number of locations triggered = " + locations.Length);
+		//Debug.Log ("number of strenght recorded = " + strength.Length);
 		Array.Reverse (strength);
 		Array.Reverse (locations);
 
@@ -113,7 +113,7 @@ public class TouchManager : MonoBehaviour {
 			}
 
 			if(supportingPoints > touchSensitivity){
-				TriggerTouch(locations[i]/512, locations[i]%512);
+				TriggerTouch(locations[i]%512, locations[i]/512);
 				i = strength.Length;
 			}
 
@@ -122,9 +122,9 @@ public class TouchManager : MonoBehaviour {
 	}
 
 	private void TriggerTouch(int x, int y){
-		Debug.Log("x is: " + x);
-		Debug.Log("y is: " + y);
-		Vector3 v3 = new Vector3(x/20, y/20, 12);
+		//Debug.Log("x is: " + x);
+		//Debug.Log("y is: " + y);
+		Vector3 v3 = new Vector3(x/10, (512-y)/10, 0);
 		_nodeController.createNode (v3);
 	}
 	
@@ -175,13 +175,13 @@ public class TouchManager : MonoBehaviour {
 	}
 
 	private void Insert(string[] value){
-		Debug.Log (value[23]);
-		Debug.Log (value.Length);
+		//Debug.Log (value[23]);
+		//Debug.Log (value.Length);
 		for (int i =0; i<(value.Length-1); i++) {
 			baseFrame[i] = (ushort)Int32.Parse(value[i]);
 		}
-		Debug.Log (baseFrame[217086]);
-		Debug.Log ("reading done!");
+		//Debug.Log (baseFrame[217086]);
+		//Debug.Log ("reading done!");
 	}
 
 }

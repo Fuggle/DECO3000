@@ -102,8 +102,8 @@ public class SmoothManager : MonoBehaviour {
 			current ++;
 		} else {
 			//After the frame has been fill, new pop in is needed pop out is needed, average calculated
-			print ("reset!");
-			print(current);
+			//print ("reset!");
+			//print(current);
 			current = 0;
 		}
 	}
@@ -142,7 +142,7 @@ public class SmoothManager : MonoBehaviour {
 			}
 
 		}
-		Debug.Log ("discarded amount = " + discarded);
+		//Debug.Log ("discarded amount = " + discarded);
 	}
 
 	//new average is calculated

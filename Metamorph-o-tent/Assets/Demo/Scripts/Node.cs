@@ -9,15 +9,15 @@ public class Node : MonoBehaviour {
 	List<GameObject> nodeList;
 	float scaleAmount = 1.5f;
 	float decayAmount = 0.9990f;
-	public float maxScale = 12;
+	float maxScale = 2;
 	float currentScale;
-	float minScale = 1f;
+	float minScale = 0.75f;
 	int passNum = 0;
 	public float sizePercentage;
 	float timer = 0;
 	bool scaleNode;
 
-	public float timeOfScale = 3f;
+	public float timeOfScale = 0.5f;
 	//Whether we are currently interpolating Scale or not
 	private bool isScaling;
 	
@@ -58,8 +58,9 @@ public class Node : MonoBehaviour {
 		slowDecay ();
 
 		if (isScaling) {
-			if (transform.localScale.magnitude > maxScale) {
+			if (transform.localScale.x > (maxScale - 0.1f)) {
 				nodeController.TriggerEvent (this.gameObject.transform);
+				print ("Trigger event");
 				return;
 			}
 
@@ -73,9 +74,9 @@ public class Node : MonoBehaviour {
 			}
 		}
 
-		currentScale = transform.localScale.magnitude;
+		currentScale = transform.localScale.x;
 
-		sizePercentage = (1 - (maxScale - currentScale) / (maxScale - minScale)) + 0.3f;
+		sizePercentage = (1 - (maxScale - currentScale) / (maxScale - minScale));
 
 		currentParticleSize = minParticleSize + ((maxParticleSize - minParticleSize) * sizePercentage);
 		coreParticles.scale = currentParticleSize;
@@ -118,8 +119,15 @@ public class Node : MonoBehaviour {
 				
 		//We set the start position to the current position, and the finish to 10 spaces in the 'forward' direction
 		startScale = transform.localScale;
-		endScale = new Vector3 (transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, 
+
+		if (transform.localScale.x * scaleAmount < maxScale) {
+			endScale = new Vector3 (transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, 
 		                    transform.localScale.z * scaleAmount);
+		} else {
+			endScale = new Vector3 (maxScale, maxScale, maxScale);
+		}
+
+
 
 		/*
 		scaleNode = true;
@@ -131,6 +139,7 @@ public class Node : MonoBehaviour {
 		}*/
 	}
 
+	/*
 	public void nodeHover(float scaleAmount)
 	{
 		if (transform.localScale.magnitude > maxScale) {
@@ -139,7 +148,7 @@ public class Node : MonoBehaviour {
 			transform.localScale = new Vector3 
 				(transform.localScale.x * scaleAmount, transform.localScale.y * scaleAmount, transform.localScale.z * scaleAmount);
 		}
-	}
+	}*/
 
 	/// <summary>
 	/// Slowly decays the node.

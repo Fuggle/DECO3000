@@ -18,6 +18,8 @@ public class SoundManager : MonoBehaviour {
 		foreach (AudioClip layer in layers) {
 			sortedLayers.Add(layer.name, layer);
 		}
+
+		playLayer ("atmosphere-bgm", 0.7f, 1);
 	}
 	
 	// Update is called once per frame
