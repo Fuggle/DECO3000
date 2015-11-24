@@ -14,37 +14,10 @@ public class Rotate : MonoBehaviour {
 
 
 	// Update is called once per frame
-	void Update () {
-
-		transform.Rotate(Vector3.right * spinSpeed);
-
-		/*
-		//increment timer once per frame
-		currentLerpTime += Time.deltaTime;
-		if (currentLerpTime > lerpTime) {
-			currentLerpTime = lerpTime;
-		}
-		
-		//lerp!
-		float perc = currentLerpTime / lerpTime;
-		transform.position = Vector3.Lerp(startPos, endPos, perc);
-
-		*/
-		/*
-		if (isScalingUp && scaleBuffer < limit) {
-			this.transform.localScale = new Vector3(transform.localScale.x + scaleAmount, transform.localScale.y + scaleAmount, transform.localScale.z + scaleAmount);
-			scaleBuffer++;
-			if (scaleBuffer == limit) {
-				isScalingUp = false;
-			}
-		}
-
-		if (!isScalingUp && scaleBuffer > -limit) {
-			this.transform.localScale = new Vector3(transform.localScale.x - scaleAmount, transform.localScale.y - scaleAmount, transform.localScale.z - scaleAmount);
-			scaleBuffer--;
-			if (scaleBuffer == -limit) {
-				isScalingUp = true;
-			}
-		}*/
+	void Start () {
+		float random = Random.value * 360;
+		transform.Rotate (random, random, random);
+	//	transform.rotation = new Vector3 (transform.rotation.x * random, transform.rotation.y * random, transform.rotation.z * random);
+	
 	}
 }

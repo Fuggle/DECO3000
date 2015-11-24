@@ -767,19 +767,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
       propertyPath: localTime
-      value: .919339955
+      value: 540.8125
       objectReference: {fileID: 0}
     - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
       propertyPath: localDeltaTime
-      value: 0
+      value: .0716552734
       objectReference: {fileID: 0}
     - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
       propertyPath: simulationStarted
-      value: .919339955
+      value: 540.338318
       objectReference: {fileID: 0}
     - target: {fileID: 11487364, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
       propertyPath: localTime
-      value: .919339955
+      value: 513.091431
       objectReference: {fileID: 0}
     - target: {fileID: 11487364, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
       propertyPath: localDeltaTime
@@ -787,11 +787,63 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11487364, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
       propertyPath: simulationStarted
-      value: .919339955
+      value: 513.091431
       objectReference: {fileID: 0}
     - target: {fileID: 11435090, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: updateRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: manipulators.Array.data[0].transform.instanceID
+      value: -217116
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: manipulators.Array.data[0].manipulatorId
+      value: -217116
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: isReadyForThreadedCalculations
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: particleTimescale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: emissionRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: particleCount
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: sizeMax
+      value: .276335865
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: scale
+      value: .620000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: manipulators.Array.data[0].shape
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: turbulenceStrength
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: turbulenceScale
+      value: .50999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408534, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
+      propertyPath: turbulenceTimeScale
+      value: .319999993
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}

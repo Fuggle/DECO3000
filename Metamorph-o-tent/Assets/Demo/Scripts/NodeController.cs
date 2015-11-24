@@ -16,9 +16,9 @@ public class NodeController : MonoBehaviour {
 	int pathCounter = 0;
 
 	public float speed = 5;
-	public float checkRadius = 3f;
+	public float checkRadius = 2f;
 	public bool movingNode;
-	bool eventTriggered;
+	public bool eventTriggered;
 	float currentLerpTime = 0;
 	void Start () 
 	{
@@ -100,14 +100,14 @@ public class NodeController : MonoBehaviour {
 			print ("TriggerEvent!!");
 
 			// sond that gets played when the node event is triggered
-			Camera.main.GetComponent<SoundManager>().playLayer("Bell1", 0.7f, 1);
-
+			Camera.main.GetComponent<SoundManager>().playLayer("Bell1", 0.3f, 1);
+			print ("fart");
 			float triggeredNodeDistance = Vector3.Distance (centralNode.transform.position, triggeredNode.position);
 			List<Transform> temporaryNodelist = new List<Transform> ();
 
 			List<float> temporaryDistanceList = new List<float> ();
 			List<Transform> actualList = new List<Transform> ();
-			
+
 			foreach (GameObject aNode in nodeList) {
 				float distance = Vector3.Distance (aNode.transform.position, centralNode.transform.position);
 				float nodeDistance = Vector3.Distance(aNode.transform.position, triggeredNode.position);
@@ -116,7 +116,7 @@ public class NodeController : MonoBehaviour {
 					temporaryDistanceList.Add (Vector3.Distance (aNode.transform.position, centralNode.transform.position));
 				}
 			}
-			
+
 			Transform[] transArray = temporaryNodelist.ToArray ();
 			float[] distArray = temporaryDistanceList.ToArray ();
 			

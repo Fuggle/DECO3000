@@ -11,9 +11,7 @@ GameObject:
   - 33: {fileID: 3303230}
   - 65: {fileID: 6599718}
   - 23: {fileID: 2306496}
-  - 114: {fileID: 11419322}
   - 114: {fileID: 11431946}
-  - 120: {fileID: 12007968}
   m_Layer: 0
   m_Name: Node New
   m_TagString: Node
@@ -46,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.2299995, y: .779999971, z: 11.0900002}
+  m_LocalPosition: {x: -2.1596446, y: 2.37060118, z: -2.07364798}
   m_LocalScale: {x: 3.33174372, y: 3.33174562, z: 3.33174562}
   m_Children:
   - {fileID: 434214}
@@ -138,18 +136,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11419322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca77e671a6aa51c4d852ab013f107d1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  connectionRadius: 11.96
 --- !u!114 &11431946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,43 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d9461343a9d2642a467a2a8e543f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!120 &12007968
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157502}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: 1
-    endWidth: 1
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
+  sizePercentage: 0
+  timeOfScale: .5
+  ringParticles: {fileID: 0}
+  coreParticles: {fileID: 0}
+  currentParticleSize: 0
+  currentTurbulence: 0
 --- !u!135 &13504848
 SphereCollider:
   m_ObjectHideFlags: 1
