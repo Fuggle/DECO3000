@@ -111,5 +111,12 @@ public class ArduinoCommManager : MonoBehaviour {
 //		GUI.Label(new Rect(10,10,300,100), newString); //Display new values
 //	}
 
+	public void TurnOn (){
+		port.Write ("1");
+	}
+
+	public void TurnOff (){
+		port.Write ("0");
+	}
 
 }

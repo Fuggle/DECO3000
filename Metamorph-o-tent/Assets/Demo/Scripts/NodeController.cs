@@ -21,15 +21,25 @@ public class NodeController : MonoBehaviour {
 	public bool movingNode;
 	public bool eventTriggered;
 	float currentLerpTime = 0;
+
+	private float timeDelay = 3f;
+
 	void Start () 
 	{
 		nodeList = new List<GameObject>();
 		nodeHitList = new List<GameObject>();
 		nodePathList = new List<Transform>();
 		pathCounter = 0;
+		
 	}
 
 	void Update(){
+		if (timeDelay <= 0) {
+			ArduinoCommManager commManager = Camera.main.GetComponent<ArduinoCommManager>();
+			commManager.TurnOff();
+			timeDelay = 3f;
+		}
+		timeDelay-=Time.deltaTime;
 
 		if (movingNode && nodePathList.Count > 1) {	
 
@@ -99,41 +109,44 @@ public class NodeController : MonoBehaviour {
 	public void TriggerEvent(Transform triggeredNode)
 	{
 		if (!eventTriggered) {
-			eventTriggered = true;
-			print ("TriggerEvent!!");
+			ArduinoCommManager commManager = Camera.main.GetComponent<ArduinoCommManager>();
+			commManager.TurnOn();
 
-			// sond that gets played when the node event is triggered
-			Camera.main.GetComponent<SoundManager>().playLayer("Bell1", 0.3f, 1);
-			print ("fart");
-			float triggeredNodeDistance = Vector3.Distance (centralNode.transform.position, triggeredNode.position);
-			List<Transform> temporaryNodelist = new List<Transform> ();
-
-			List<float> temporaryDistanceList = new List<float> ();
-			List<Transform> actualList = new List<Transform> ();
-
-			foreach (GameObject aNode in nodeList) {
-				float distance = Vector3.Distance (aNode.transform.position, centralNode.transform.position);
-				float nodeDistance = Vector3.Distance(aNode.transform.position, triggeredNode.position);
-				if (distance < triggeredNodeDistance && nodeDistance < triggeredNodeDistance) {
-					temporaryNodelist.Add (aNode.transform);
-					temporaryDistanceList.Add (Vector3.Distance (aNode.transform.position, centralNode.transform.position));
-				}
-			}
-
-			Transform[] transArray = temporaryNodelist.ToArray ();
-			float[] distArray = temporaryDistanceList.ToArray ();
-			
-			Array.Sort (distArray, transArray);
-		
-
-			for(int i = transArray.Length - 1; i > -1; i--) {
-				nodePathList.Add(transArray[i]);
-			}
-			nodePathList.Insert(0,triggeredNode);
-			nodePathList.Add (centralNode.transform);
-			print(nodePathList.Count);
-			movingNode = true;
-			float currentLerpTime = 0f;
+//			eventTriggered = true;
+//			print ("TriggerEvent!!");
+//
+//			// sond that gets played when the node event is triggered
+//			Camera.main.GetComponent<SoundManager>().playLayer("Bell1", 0.3f, 1);
+//			//print ("fart");
+//			float triggeredNodeDistance = Vector3.Distance (centralNode.transform.position, triggeredNode.position);
+//			List<Transform> temporaryNodelist = new List<Transform> ();
+//
+//			List<float> temporaryDistanceList = new List<float> ();
+//			List<Transform> actualList = new List<Transform> ();
+//
+//			foreach (GameObject aNode in nodeList) {
+//				float distance = Vector3.Distance (aNode.transform.position, centralNode.transform.position);
+//				float nodeDistance = Vector3.Distance(aNode.transform.position, triggeredNode.position);
+//				if (distance < triggeredNodeDistance && nodeDistance < triggeredNodeDistance) {
+//					temporaryNodelist.Add (aNode.transform);
+//					temporaryDistanceList.Add (Vector3.Distance (aNode.transform.position, centralNode.transform.position));
+//				}
+//			}
+//
+//			Transform[] transArray = temporaryNodelist.ToArray ();
+//			float[] distArray = temporaryDistanceList.ToArray ();
+//			
+//			Array.Sort (distArray, transArray);
+//		
+//
+//			for(int i = transArray.Length - 1; i > -1; i--) {
+//				nodePathList.Add(transArray[i]);
+//			}
+//			nodePathList.Insert(0,triggeredNode);
+//			nodePathList.Add (centralNode.transform);
+//			print(nodePathList.Count);
+//			movingNode = true;
+//			float currentLerpTime = 0f;
 		} 
 		
 	}
