@@ -20,7 +20,7 @@ public class ArduinoCommManager : MonoBehaviour {
 //			Debug.Log(p);
 //		}
 
-		port = new SerialPort("COM3", 9600);
+		port = new SerialPort("COM4", 9600);
 	}
 
 	// Use this for initialization
