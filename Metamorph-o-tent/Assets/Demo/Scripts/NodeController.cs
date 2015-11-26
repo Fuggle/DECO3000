@@ -7,6 +7,7 @@ using System;
 public class NodeController : MonoBehaviour {
 	public GameObject node;
 	public GameObject centralNode;
+	public GameObject cell;
 
 	public List<GameObject> nodeList;
 
@@ -77,6 +78,8 @@ public class NodeController : MonoBehaviour {
 			print ("Make node");
 			//creates node and adds to 'nodeList'
 			GameObject currentNode = (GameObject)Instantiate (node, touchLocation , transform.rotation);
+			GameObject theCell = (GameObject)Instantiate (node, touchLocation , transform.rotation);
+			theCell.transform.parent = currentNode.transform;
 			currentNode.transform.LookAt(Camera.main.transform.position);
 			nodeList.Add(currentNode);
 			return;

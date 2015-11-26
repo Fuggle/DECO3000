@@ -419,6 +419,7 @@ MonoBehaviour:
   speed: 3
   checkRadius: 3
   movingNode: 0
+  eventTriggered: 0
 --- !u!114 &1038160411
 MonoBehaviour:
   m_ObjectHideFlags: 0
