@@ -412,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   node: {fileID: 199896, guid: 2e27e7b59899d4d3a86a1b2873da44b8, type: 2}
   centralNode: {fileID: 278371744}
+  cell: {fileID: 105876, guid: 692da5ed6c368407ea97b5add4c0708d, type: 2}
   nodeList: []
   nodePathList: []
   nodeHitList: []
