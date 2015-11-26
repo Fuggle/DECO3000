@@ -22,7 +22,7 @@ public class NodeController : MonoBehaviour {
 	public bool eventTriggered;
 	float currentLerpTime = 0;
 
-	private float timeDelay = 3f;
+	private float timeDelay = 4f;
 
 	void Start () 
 	{
@@ -30,16 +30,18 @@ public class NodeController : MonoBehaviour {
 		nodeHitList = new List<GameObject>();
 		nodePathList = new List<Transform>();
 		pathCounter = 0;
+		Camera.main.GetComponent<ArduinoCommManager>().TurnOff();
 		
 	}
 
 	void Update(){
-		if (timeDelay <= 0) {
-			ArduinoCommManager commManager = Camera.main.GetComponent<ArduinoCommManager>();
-			commManager.TurnOff();
-			timeDelay = 3f;
-		}
-		timeDelay-=Time.deltaTime;
+//		if (timeDelay > 0f && timeDelay < 4f) {
+//			timeDelay-=Time.deltaTime;
+//		} else if (timeDelay <= 0f){
+//			ArduinoCommManager commManager = Camera.main.GetComponent<ArduinoCommManager> ();
+//			commManager.TurnOff ();
+//			timeDelay = 4f;
+//		}
 
 		if (movingNode && nodePathList.Count > 1) {	
 
@@ -88,8 +90,11 @@ public class NodeController : MonoBehaviour {
 			print ("Make node");
 			//creates node and adds to 'nodeList'
 			GameObject currentNode = (GameObject)Instantiate (node, touchLocation , transform.rotation);
-			GameObject theCell = (GameObject)Instantiate (node, touchLocation , transform.rotation);
+			GameObject theCell = (GameObject)Instantiate (cell, touchLocation , Quaternion.identity);
 			theCell.transform.parent = currentNode.transform;
+			ArduinoCommManager commManager = Camera.main.GetComponent<ArduinoCommManager>();
+			commManager.triggerLight(4.5f);
+
 			currentNode.transform.LookAt(Camera.main.transform.position);
 			nodeList.Add(currentNode);
 			return;
@@ -109,8 +114,11 @@ public class NodeController : MonoBehaviour {
 	public void TriggerEvent(Transform triggeredNode)
 	{
 		if (!eventTriggered) {
-			ArduinoCommManager commManager = Camera.main.GetComponent<ArduinoCommManager>();
-			commManager.TurnOn();
+
+			if(Camera.main.transform.FindChild("EventBackground")) {
+				print("background found");
+				Camera.main.transform.FindChild("EventBackground").gameObject.GetComponent<EventBackground>().setTrigger(true);
+			}
 
 //			eventTriggered = true;
 //			print ("TriggerEvent!!");

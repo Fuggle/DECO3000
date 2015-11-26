@@ -4,9 +4,9 @@ using System.Collections;
 public class EventBackground : MonoBehaviour {
 
 	SpriteRenderer spriteRenderer;
-	float timeLeft = .5f;
+	float timeLeft = .8f;
 	bool becomingvisible = true;
-	float scaleFactor = (1f / .5f) / 60;
+	float scaleFactor = (1f / .8f) / 60;
 	float currentTransparency = 0;
 
 	bool eventTriggered = false;
@@ -26,8 +26,8 @@ public class EventBackground : MonoBehaviour {
 				spriteRenderer.color = new Color (1f, 1f, 1f, currentTransparency);
 				//this.transform.localScale = new Vector2 (currentTransparency, currentTransparency);
 				if (timeLeft < 0) {
-					becomingInvisible = false;
-					timeLeft = .5f;
+					becomingvisible = false;
+					timeLeft = .8f;
 				}
 			} else {
 				timeLeft -= Time.deltaTime;
@@ -37,9 +37,10 @@ public class EventBackground : MonoBehaviour {
 				//this.transform.localScale = new Vector2 (currentTransparency, currentTransparency);
 				if (timeLeft < 0) {
 					print ("should do something");
-					becomingInvisible = true;
-					timeLeft = .5f;
+					becomingvisible = true;
+					timeLeft = .8f;
 					setTrigger(false);
+					spriteRenderer.color = new Color (1f, 1f, 1f, 0f);
 				}
 			}
 		}

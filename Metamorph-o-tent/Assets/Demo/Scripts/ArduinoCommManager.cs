@@ -119,4 +119,16 @@ public class ArduinoCommManager : MonoBehaviour {
 		port.Write ("0");
 	}
 
+	public void triggerLight(float timeDelay) {
+		TurnOn ();
+		float t = timeDelay;
+		while (t > 0) {
+			t -= Time.deltaTime;
+			if(t > 0) {
+				TurnOff();
+				break;
+			}
+		}
+	}
+
 }
