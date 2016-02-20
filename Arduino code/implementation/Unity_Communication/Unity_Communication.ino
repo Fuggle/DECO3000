@@ -1,6 +1,7 @@
 int ledPin = 6;
 boolean fading = false; //is it already fading?
 int fadespeed = 20; //higher == slower
+boolean mode = false;
 
 void setup() {
   pinMode(ledPin, OUTPUT);
@@ -19,17 +20,18 @@ void loop() {
      char on = '1';
      char off = '0';
      if (!fading) {
-       if (incomingByte == on) {
+       if (incomingByte == on && !mode) {
         fadeIn();
         Serial.print("LED ON");
+        mode == true;
        } else if (incomingByte == off) {
         fadeOut();
         Serial.print("LED OFF");
+        mode = false;
        }
      }
   }
   Serial.flush();
-  delay(50);
 }
 
 void fadeIn(){

@@ -20,7 +20,7 @@ public class ArduinoCommManager : MonoBehaviour {
 //			Debug.Log(p);
 //		}
 
-		port = new SerialPort("COM3", 9600);
+		port = new SerialPort("COM4", 9600);
 	}
 
 	// Use this for initialization
@@ -111,5 +111,24 @@ public class ArduinoCommManager : MonoBehaviour {
 //		GUI.Label(new Rect(10,10,300,100), newString); //Display new values
 //	}
 
+	public void TurnOn (){
+		port.Write ("1");
+	}
+
+	public void TurnOff (){
+		port.Write ("0");
+	}
+
+	public void triggerLight(float timeDelay) {
+		TurnOn ();
+		float t = timeDelay;
+		while (t > 0) {
+			t -= Time.deltaTime;
+			if(t > 0) {
+				TurnOff();
+				break;
+			}
+		}
+	}
 
 }
