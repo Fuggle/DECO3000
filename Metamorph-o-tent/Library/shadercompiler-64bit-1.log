@@ -1,3 +1,31 @@
-Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-7552
+Base path: H:/Applications/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-1772
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=611 outsize=608 ok=1
+Cmd: preprocess
+  insize=753 outsize=750 ok=1
+Cmd: preprocess
+  insize=1493 outsize=147 ok=1
+Cmd: compileSnippet
+  error: 2 plat 4 at (0): Fragment program 'frag': sampler 'SampleType' has no matching texture and will be undefined.
+\nCompiling Fragment program
+  api=4 type=1 insize=1643 outsize=0 kw= pd= ok=0
+Cmd: preprocess
+  insize=440 outsize=437 ok=1
+Cmd: preprocess
+  insize=266 outsize=263 ok=1
+Cmd: preprocess
+  insize=582 outsize=579 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=751 outsize=3776 kw=SHADOWS_DEPTH _ALPHABLEND_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=751 outsize=1233 kw=SHADOWS_DEPTH _ALPHABLEND_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=982 outsize=3979 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION _ALPHABLEND_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=982 outsize=10853 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION _ALPHABLEND_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=938 outsize=4101 kw=DIRECTIONAL SHADOWS_OFF _ALPHABLEND_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=938 outsize=5539 kw=DIRECTIONAL SHADOWS_OFF _ALPHABLEND_ON pd= ok=1
