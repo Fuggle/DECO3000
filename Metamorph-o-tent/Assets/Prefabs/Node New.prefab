@@ -153,6 +153,7 @@ MonoBehaviour:
   coreParticles: {fileID: 0}
   currentParticleSize: 0
   currentTurbulence: 0
+  canConnect: 0
 --- !u!135 &13504848
 SphereCollider:
   m_ObjectHideFlags: 1

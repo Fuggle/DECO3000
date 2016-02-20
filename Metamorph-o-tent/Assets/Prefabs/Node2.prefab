@@ -12,13 +12,13 @@ GameObject:
   - 199: {fileID: 19928034}
   - 114: {fileID: 11451670}
   - 114: {fileID: 11489994}
+  - 114: {fileID: 11468172}
   - 135: {fileID: 13552364}
   - 33: {fileID: 3322174}
   - 23: {fileID: 2370132}
-  - 114: {fileID: 11468172}
   m_Layer: 0
   m_Name: Node2
-  m_TagString: Untagged
+  m_TagString: Node
   m_Icon: {fileID: 2800000, guid: 344d4b0036e1d401e8c6c53be26368f0, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 19.3113575, y: 23.1200008, z: 61.1469193}
   m_LocalScale: {x: 4.06344891, y: 4.06344891, z: 4.06344891}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,7 +41,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -113,7 +113,7 @@ MonoBehaviour:
     m_PostInfinity: 2
   sizeMin: 0
   sizeMax: .512244821
-  scale: 5
+  scale: 7.21999979
   initialRotationMin: -360
   initialRotationMax: 360
   rotationSpeedMin: -360
@@ -12029,7 +12029,7 @@ MonoBehaviour:
   sourceTransform: {fileID: 415854}
   sourceTransforms:
   - transform: {fileID: 415854}
-    instanceID: 7410
+    instanceID: -376888
     available: 1
     position: {x: 0, y: 0, z: 0}
     localPosition: {x: 0, y: 0, z: 0}
@@ -12177,7 +12177,7 @@ MonoBehaviour:
   timeOfSnapshot: 0
   isSnapshot: 0
   shurikenParticleSystem: {fileID: 19825544}
-  particleSystemId: 2
+  particleSystemId: 3
   particleSystemGameObject: {fileID: 194160}
   particleSystemTransform: {fileID: 415854}
   particleSystemRenderer: {fileID: 19928034}
@@ -12208,8 +12208,8 @@ MonoBehaviour:
   prewarmTime: 1
   prewarmCycles: 20
   particleTimescale: 1
-  localTime: 9.38551331
-  localDeltaTime: .0165653229
+  localTime: 1.26770651
+  localDeltaTime: .0312999487
   previousActiveState: 0
   simulationStarted: .100000001
   loopExceeded: 0
@@ -12225,27 +12225,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d6ba632a1db3843b722bca52bea84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 5
-  min: 0
-  max: 10
-  decayTime: 50
   visualParticles: {fileID: 11451670}
+  currentScale: 0
+  min: 0
+  connectionSize: 8
+  max: 10
+  growthFactor: 2
+  timeOfScale: 1.5
+  decayAmount: .999000013
+  sizePercentage: 0
 --- !u!114 &11489994
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194160}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 937b1097a3987694caf27d69f4552625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scale: .5
   visualParticles: {fileID: 11451670}
-  visable: 0
-  fadedIn: 1
-  speed: 5
+  visable: 1
+  fadeSpeed: 5
 --- !u!135 &13552364
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -12253,7 +12256,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194160}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -13353,7 +13356,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Node
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb6fbaf13942141028bb1ffe2114ecde, type: 2}
+    - target: {fileID: 0}
+      propertyPath: visable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194160}

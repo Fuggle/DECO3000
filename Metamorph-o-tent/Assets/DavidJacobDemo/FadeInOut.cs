@@ -15,19 +15,9 @@ public class FadeInOut : MonoBehaviour {
 	bool fadedIn = true;
 	float currentLerpTime = 0;
 
-	void Start()
-	{
-		if (visable) 
-		{
-			visualParticles.emissionRate = 1;
-		} else 
-		{
-			visualParticles.emissionRate = 0;
-		}
-	}
-
 	void Update()
 	{
+
 		// slowly fades node's particle emission settings in
 		if (!fadedIn && visable) 
 		{	
@@ -58,9 +48,10 @@ public class FadeInOut : MonoBehaviour {
 	public void visibleOn()
 	{
 		if (!visable) {
+			print ("visible on");
 			visable = true;
-			fadedIn = false;
 			visualParticles.emit = true;
+			fadedIn = false;
 			currentLerpTime = 0;
 		}
 	}
@@ -70,10 +61,13 @@ public class FadeInOut : MonoBehaviour {
 	/// </summary>
 	public void visibleOff()
 	{
+
 		if (visable) {
 			visable = false;
-			visualParticles.emissionRate = 0;
 			visualParticles.emit = false;
+			print ("visible off");
+			visualParticles.emissionRate = 0;
+
 		}
 	}
 }

@@ -40,6 +40,8 @@ public class Node : MonoBehaviour {
 
 	public float currentTurbulence;
 
+	public bool canConnect;
+
 //	private ParticlePlayground playgroundController; 
 
 	void Start () 
@@ -161,6 +163,11 @@ public class Node : MonoBehaviour {
 		if (transform.localScale.magnitude < minScale) {
 			destroyNode();
 		}
+	}
+
+	// 
+	public bool connectReady() {
+		return canConnect;
 	}
 
 	/// <summary>

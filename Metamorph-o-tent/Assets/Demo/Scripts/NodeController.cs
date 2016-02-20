@@ -24,6 +24,8 @@ public class NodeController : MonoBehaviour {
 
 	private float timeDelay = 4f;
 
+	public List<Connection> connections;
+
 	void Start () 
 	{
 		nodeList = new List<GameObject>();
@@ -119,42 +121,7 @@ public class NodeController : MonoBehaviour {
 				print("background found");
 				Camera.main.transform.FindChild("EventBackground").gameObject.GetComponent<EventBackground>().setTrigger(true);
 			}
-
-//			eventTriggered = true;
-//			print ("TriggerEvent!!");
-//
-//			// sond that gets played when the node event is triggered
-//			Camera.main.GetComponent<SoundManager>().playLayer("Bell1", 0.3f, 1);
-//			//print ("fart");
-//			float triggeredNodeDistance = Vector3.Distance (centralNode.transform.position, triggeredNode.position);
-//			List<Transform> temporaryNodelist = new List<Transform> ();
-//
-//			List<float> temporaryDistanceList = new List<float> ();
-//			List<Transform> actualList = new List<Transform> ();
-//
-//			foreach (GameObject aNode in nodeList) {
-//				float distance = Vector3.Distance (aNode.transform.position, centralNode.transform.position);
-//				float nodeDistance = Vector3.Distance(aNode.transform.position, triggeredNode.position);
-//				if (distance < triggeredNodeDistance && nodeDistance < triggeredNodeDistance) {
-//					temporaryNodelist.Add (aNode.transform);
-//					temporaryDistanceList.Add (Vector3.Distance (aNode.transform.position, centralNode.transform.position));
-//				}
-//			}
-//
-//			Transform[] transArray = temporaryNodelist.ToArray ();
-//			float[] distArray = temporaryDistanceList.ToArray ();
-//			
-//			Array.Sort (distArray, transArray);
-//		
-//
-//			for(int i = transArray.Length - 1; i > -1; i--) {
-//				nodePathList.Add(transArray[i]);
-//			}
-//			nodePathList.Insert(0,triggeredNode);
-//			nodePathList.Add (centralNode.transform);
-//			print(nodePathList.Count);
-//			movingNode = true;
-//			float currentLerpTime = 0f;
+		
 		} 
 		
 	}
@@ -178,6 +145,68 @@ public class NodeController : MonoBehaviour {
 		return returnThis;
 		
 	}
+
+	//create a connection between two nodes and store in the connections list
+	public void createConnection ( NodeNew triggeringNode)
+	{
+		// when the node gets big enough it triggers the event and is ready to make connections
+		
+		if (triggeringNode.connectReady ()) {
+			
+			if (nodeList.Count > 0) {
+				
+				// attempt to connect to all suitable nodes
+				for (int i = 0; i < nodeList.Count; i++) {
+					
+					if (nodeList [i].GetComponent<NodeNew>().connectReady() && nodeList [i].GetComponent<NodeNew>() != triggeringNode) {
+						
+						Connection conn = new Connection (triggeringNode, nodeList [i].GetComponent<NodeNew>());
+						
+						if (!searchConnectionsForDuplicates (conn, connections)) {
+							connections.Add(conn);
+							
+							// draw line from one node to another
+							// drawline(conn);
+						}
+					}
+				}
+			}
+		}
+		print ("number of elements in connections" + connections.Count);
+	}
+
+	//searches the given list of connections for a duplicate of the attempted connection
+	bool searchConnectionsForDuplicates(Connection attemptedConnection, List<Connection> connectionList) {
+		
+		// check to see if this connection has already been formed
+		for( int n = 0; n < connectionList.Count; n++) {
+			
+			if (checkConnectionsTheSame(attemptedConnection, connectionList[n])) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	//compares two connections to see if they are the same
+	bool checkConnectionsTheSame(Connection conn1, Connection conn2)
+	{
+		return conn1.containsNode(conn2.getFirstNode()) && conn1.containsNode(conn2.getSecondNode());
+	}
+
+	//draws a line between two nodes
+	/*
+	void drawline(Connection conn) {
+		
+		Vector3[] positions = new Vector3 [2];
+		
+		GameObject line = Instantiate(lineConnection, new Vector2(0,0), Quaternion.identity) as GameObject;
+		LineRenderer lineRenderer = line.GetComponent<LineRenderer> ();
+		positions [0] = conn.getFirstNode ().gameObject.transform.position;
+		positions [1] = conn.getSecondNode ().gameObject.transform.position;
+		lineRenderer.SetPositions (positions);
+	} */
 
 	
 }

@@ -6,28 +6,49 @@ using ParticlePlayground;
 public class NodeNew : MonoBehaviour {
 
 	public PlaygroundParticlesC visualParticles;
-	public float scale = 5, min = 3, max = 10;
+	public float currentScale = 5, min = 3, connectionSize = 8, max = 10;
 
-	public float growthFactor = 1.5f, timeOfScale = 2f, decayAmount = 0.9990f;
+	public float growthFactor = 1.5f, timeOfScale = 3f, decayAmount = 0.9990f;
 	public float sizePercentage;
-	
-	float currentScale;
-	Vector3 newScale;
+	bool canConnect;
+	NodeControllerNew nodeController;
+	float timer = 0;
+	float connectionTimer = 0, connectionCoolDown = 3;
 
 	int reinforceNumber = 0;
 
-	//The Time.time value when we started the interpolation
-	float timeStartedScaling;
 
 	//Whether we are currently interpolating Scale or not
-	bool isScaling;
+	bool isScaling, connectionIsReady;
 	
 	//The start and finish positions for the interpolation
-	Vector3 startScale;
-	Vector3 endScale;
-	
-	void Update () {
+	Vector3 startScale, endScale, newScale;
+
+
+	void Start()
+	{
+		nodeController = Camera.main.GetComponent<NodeControllerNew> ();
+	}
+
+	void Update () 
+	{
+
+		if (currentScale >= connectionSize && isScaling || connectionIsReady) 
+		{
+			canConnect = true;
+			print ("attempting to make a connection");
+			visualParticles.initialLocalVelocityMax = new Vector3(20f,0.1f,0.1f);
+			nodeController.makeConnectionsVisible (this.GetComponent<NodeNew>());
+			nodeController.createConnection (this.gameObject.GetComponent<NodeNew> ());
+
+		} else 
+		{
+			canConnect = false;
+			visualParticles.initialLocalVelocityMax = new Vector3(0.1f,0.1f,0.1f);
+		}
+
 		currentScale = transform.localScale.x;
+
 		slowDecay ();
 		clampScale ();
 
@@ -39,22 +60,25 @@ public class NodeNew : MonoBehaviour {
 
 
 		if (isScaling) {
-			if (transform.localScale.x > (max - 0.1f)) {
-				print ("Trigger event");
-				return;
-			}
-			print ("is scaling");
-			/*
-			float timeSinceStarted = 0;
-			float timeSinceStarted += Time.deltaTime;
-			float percentageComplete = timeSinceStarted / timeOfScale;
+
+			timer += Time.deltaTime;
+			float perc = timer / timeOfScale;
 			
-			transform.localScale = Vector3.Lerp (startScale, endScale, percentageComplete);
+			transform.localScale = Vector3.Lerp (startScale, endScale, perc);
 			
-			if(percentageComplete >= 1.0f){
+			if(perc >= 1.0f){
 				isScaling = false;
-				timeSinceStarted = 0;
-			}*/
+				timer = 0;
+				connectionIsReady = true;
+			}
+		}
+
+		if (connectionIsReady) {
+			connectionTimer += Time.deltaTime;
+			if(connectionTimer >= connectionCoolDown){
+				connectionIsReady = false;
+				connectionTimer = 0;
+			}
 		}
 		
 		currentScale = transform.localScale.x;
@@ -83,7 +107,7 @@ public class NodeNew : MonoBehaviour {
 		transform.localScale = new Vector3 
 			(transform.localScale.x * decayAmount, transform.localScale.y * decayAmount, transform.localScale.z * decayAmount);
 		
-		if (transform.localScale.magnitude < min) {
+		if (transform.localScale.x < min + 0.5f) {
 			destroyNode();
 		}
 	}
@@ -93,6 +117,8 @@ public class NodeNew : MonoBehaviour {
 	/// </summary>
 	void destroyNode()
 	{
+		nodeController.removeConnections (this.GetComponent<NodeNew>());
+		nodeController.removeNode (this.GetComponent<NodeNew> ());
 		Destroy (this.gameObject);
 	}
 
@@ -123,21 +149,22 @@ public class NodeNew : MonoBehaviour {
 	/// </summary>
 	public void nodeTouch()
 	{
+
 		isScaling = true;
 		startScale = transform.localScale;
 		endScale = new Vector3 
 			(transform.localScale.x * growthFactor, transform.localScale.y * growthFactor, transform.localScale.z * growthFactor);
-		/*
-		if (transform.localScale.x > max-growthFactor) {
-			print ("node has reached max");
-			transform.localScale = new Vector3(max,max,max);
-			//nodeController.TriggerEvent (this.gameObject.transform);
-		} else {
-			print ("increase size of node");
+		if (endScale.x >= max) {
+			endScale = new Vector3 (max, max, max);
+		}
 
-			Vector3 newScale = new Vector3 
-				(transform.localScale.x * growthFactor, transform.localScale.y * growthFactor, transform.localScale.z * growthFactor);
-			LerpScale(transform.localScale, newScale, 0);
-		}*/
+	}
+
+	/// <summary>
+	/// Returns whether this node is ready to connect to others
+	/// </summary>
+	/// <returns><c>true</c>, if ready was connected, <c>false</c> otherwise.</returns>
+	public bool connectReady() {
+		return canConnect;
 	}
 }
