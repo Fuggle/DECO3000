@@ -3,11 +3,10 @@ using System.Collections;
 
 public class NodeTouch : MonoBehaviour {
 
-	NodeController nodeController;
-	float scaleFactor = 1.01f;
+	NodeControllerNew nodeController;
 
 	void Start () {
-		nodeController = GetComponent<NodeController> ();
+		nodeController = GetComponent<NodeControllerNew> ();
 	}
 	
 	//test for placing nodes (will be replaced by En's kinect touch code)
@@ -19,27 +18,15 @@ public class NodeTouch : MonoBehaviour {
 			//checks to see if ray is hitting existing node
 			if (Input.GetMouseButtonDown (0)) {
 			
-				/*if(hit.collider.gameObject.tag == "Node"){
-					print ("hit node directly");
-					GameObject node = hit.collider.gameObject;
-					Node nodeScript = node.GetComponent<Node>();
-					nodeScript.nodeTouched();
-					nodeScript.nodeHover(scaleFactor);
-				} else{*/
-					nodeController.createNode(hit.point);
-				//}
-				
-			} 
-			/*
-			else{
-
-
 				if(hit.collider.gameObject.tag == "Node"){
 					GameObject node = hit.collider.gameObject;
-					Node nodeScript = node.GetComponent<Node>();
-					nodeScript.nodeHover();
+					NodeNew nodeScript = node.GetComponent<NodeNew>();
+					nodeScript.nodeTouch();
+				} else{
+					nodeController.createNode(hit.point);
 				}
-			}*/
+				
+			} 
 		}
 	}
 }
