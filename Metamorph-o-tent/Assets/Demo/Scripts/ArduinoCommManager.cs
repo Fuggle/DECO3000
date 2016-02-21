@@ -10,36 +10,37 @@ public class ArduinoCommManager : MonoBehaviour {
 
 	void Awake() {
 		// Get a list of serial port names.
-//		string[] portlist = SerialPort.GetPortNames();
-//		
-//		Debug.Log("The following serial ports were found:");
-//		
-//		// Display each port name to the console.
-//		foreach(string p in portlist)
-//		{
-//			Debug.Log(p);
-//		}
+		string[] portlist = SerialPort.GetPortNames();
+		
+		Debug.Log("The following serial ports were found:");
+		
+		// Display each port name to the console.
+		foreach(string p in portlist)
+		{
+			Debug.Log(p);
+		}
 
-		port = new SerialPort("COM4", 9600);
+		port = new SerialPort("COM3", 9600);
 	}
 
 	// Use this for initialization
 	void Start () {
-		//OpenConnection();
-		port.Open();
+		OpenConnection();
+		//port.Open();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//some key binds for testing functions
 		if (Input.GetKeyDown ("v")) {
-			Debug.Log("pressed v");
-			port.Write("1");
+			checkState();
+
 		};
-		if (Input.GetKeyDown ("t")) {
-			Debug.Log("pressed t");
-			port.Write("0");
-		};
+//		if (Input.GetKeyDown ("t")) {
+//			Debug.Log("pressed t");
+//			port.Write("0");
+//		};
+
 		//strFromArduino = port.ReadLine();
 		//Debug.Log(strFromArduino);
 
@@ -52,28 +53,29 @@ public class ArduinoCommManager : MonoBehaviour {
 		};*/
 	}
 
-//	public void OpenConnection() {
-//		if (port != null) {
-//			if (port.IsOpen) {
-//				port.Close();
-//				message = "Closing port, because it was already open!";
-//			} else {
-//				port.Open();  // opens the connection
-//				port.ReadTimeout = 50;  // sets the timeout value before reporting error
-//				message = "Port Opened!";
-//			}
-//		} else {
-//			if (port.IsOpen) {
-//				print("Port is already open");
-//			} else {
-//				print("Port == null");
-//			}
-//		}
-//	}
+	public void OpenConnection() {
+		if (port != null) {
+			if (port.IsOpen) {
+				port.Close();
+				message = "Closing port, because it was already open!";
+			} else {
+				port.Open();  // opens the connection
+				port.ReadTimeout = 50;  // sets the timeout value before reporting error
+				message = "Port Opened!";
+			}
+		} else {
+			if (port.IsOpen) {
+				print("Port is already open");
+			} else {
+				print("Port == null");
+			}
+		}
+	}
 	
 	void OnApplicationQuit() {
 		port.Close ();
 	}
+
 
 		
 //	SerialPort stream = new SerialPort("COM3", 9600); //Set the port (com4) and the baud rate (9600, is standard on most devices)
@@ -110,6 +112,16 @@ public class ArduinoCommManager : MonoBehaviour {
 //		string newString = "Connected: " + transform.move.x + ", " + transform.move.y + ", " + transform.move.z;
 //		GUI.Label(new Rect(10,10,300,100), newString); //Display new values
 //	}
+
+	public void checkState () {
+		if (!port.IsOpen) {
+			port.Open ();
+		}
+
+		char incomingChar = (char)port.ReadChar();
+		Debug.Log(incomingChar);
+		port.Close ();
+	}
 
 	public void TurnOn (){
 		port.Write ("1");
