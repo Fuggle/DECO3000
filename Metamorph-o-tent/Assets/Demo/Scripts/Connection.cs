@@ -22,5 +22,13 @@ public class Connection {
 	public bool containsNode(NodeNew node) {
 		return (node == this.getFirstNode () || node == this.getSecondNode ());
 	}
+
+	public void setFirstNode (NodeNew node) {
+		nodes [0] = node;
+	}
+
+	public void setSecondNode (NodeNew node) {
+		nodes [1] = node;
+	}
 	
 }

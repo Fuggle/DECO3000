@@ -11,6 +11,7 @@ public class NodeControllerNew : MonoBehaviour {
 	
 	public List<GameObject> nodeList;
 	public List<Connection> connections;
+	public List<GameObject> lines;
 
 	public List<GameObject> nodeHitList;
 	
@@ -26,6 +27,7 @@ public class NodeControllerNew : MonoBehaviour {
 		nodeList = new List<GameObject>();
 		nodeHitList = new List<GameObject>();
 		connections = new List<Connection> ();
+		lines = new List<GameObject> ();
 	
 		//Camera.main.GetComponent<ArduinoCommManager>().TurnOff();
 		
@@ -132,6 +134,12 @@ public class NodeControllerNew : MonoBehaviour {
 		Vector3[] positions = new Vector3 [2];
 		
 		GameObject line = Instantiate(linePrefab, new Vector2(0,0), Quaternion.identity) as GameObject;
+
+		Line thisLine = line.GetComponent<Line> ();
+		thisLine.setConnection (conn);
+
+		lines.Add (line);
+
 		LineRenderer lineRenderer = line.GetComponent<LineRenderer> ();
 		Vector3 pos1 = conn.getFirstNode ().gameObject.transform.position;
 		Vector3 pos2 = conn.getSecondNode ().gameObject.transform.position;
@@ -144,6 +152,8 @@ public class NodeControllerNew : MonoBehaviour {
 	/// </summary>
 	/// <param name="node">Node.</param>
 	public void removeConnections(NodeNew node) {
+
+		//for removing connections
 		List<int> indexes = new List<int>();
 
 		for (int i = 0; i < connections.Count; i++) {
@@ -154,6 +164,20 @@ public class NodeControllerNew : MonoBehaviour {
 
 		for (int i = 0; i < indexes.Count; i++) {
 			connections.RemoveAt(indexes[i]);
+		}
+
+		//for removing connection lines
+		List<int> indexes2 = new List<int> ();
+
+		for (int i = 0; i < lines.Count; i++) {
+			if (lines [i].GetComponent<Line> ().getConnection().containsNode (node)) {
+				indexes2.Add (i);
+			}
+		}
+
+		for (int i = 0; i < indexes2.Count; i++) {
+			Destroy (lines [indexes2 [i]].gameObject);
+			lines.RemoveAt (indexes2 [i]);
 		}
 	}
 
