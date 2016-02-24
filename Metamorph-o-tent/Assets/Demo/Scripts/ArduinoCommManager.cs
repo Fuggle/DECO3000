@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO.Ports;
 
+/** This is for arduino lighting of the sculpture via unity **/
 public class ArduinoCommManager : MonoBehaviour {
 
 	public static SerialPort port;
@@ -32,10 +33,10 @@ public class ArduinoCommManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//some key binds for testing functions
-		if (Input.GetKeyDown ("v")) {
-			checkState();
-
-		};
+//		if (Input.GetKeyDown ("v")) {
+//			
+//
+//		};
 //		if (Input.GetKeyDown ("t")) {
 //			Debug.Log("pressed t");
 //			port.Write("0");
@@ -112,16 +113,6 @@ public class ArduinoCommManager : MonoBehaviour {
 //		string newString = "Connected: " + transform.move.x + ", " + transform.move.y + ", " + transform.move.z;
 //		GUI.Label(new Rect(10,10,300,100), newString); //Display new values
 //	}
-
-	public void checkState () {
-		if (!port.IsOpen) {
-			port.Open ();
-		}
-
-		char incomingChar = (char)port.ReadChar();
-		Debug.Log(incomingChar);
-		port.Close ();
-	}
 
 	public void TurnOn (){
 		port.Write ("1");

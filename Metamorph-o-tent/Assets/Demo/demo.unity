@@ -299,6 +299,7 @@ GameObject:
   - 114: {fileID: 1038160412}
   - 114: {fileID: 1038160414}
   - 114: {fileID: 1038160413}
+  - 114: {fileID: 1038160415}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -593,6 +594,17 @@ MonoBehaviour:
   matchMaker: {fileID: 0}
   matchName: default
   matchSize: 4
+--- !u!114 &1038160415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1038160401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e1a7c89ae53458097bb4fd406b77f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1194871912
 Prefab:
   m_ObjectHideFlags: 0
