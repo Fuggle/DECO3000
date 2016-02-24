@@ -73,7 +73,7 @@ public class ArduinoSensorManager : MonoBehaviour {
 		}
 		
 		char incomingChar = (char)port.ReadChar();
-		Debug.Log(incomingChar);
+		//Debug.Log(incomingChar);
 
 		//set states based on incoming state from arduino
 		//0 - none
@@ -81,15 +81,19 @@ public class ArduinoSensorManager : MonoBehaviour {
 		//2 - screen 2 only
 		//3 - both
 		if (incomingChar == '0') {
+			Debug.Log("none");
 			screenOne = false;
 			screenTwo = false;
 		} else if (incomingChar == '3') {
+			Debug.Log("both!");
 			screenOne = true;
 			screenTwo = true;
 		} else if (incomingChar == '1') {
+			Debug.Log("trigger 1");
 			screenOne = true;
 			screenTwo = false;
 		} else if (incomingChar == '2') {
+			Debug.Log("trigger 2");
 			screenOne = false;
 			screenTwo = true;
 		}

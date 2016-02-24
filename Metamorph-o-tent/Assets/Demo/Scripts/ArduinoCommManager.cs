@@ -21,7 +21,7 @@ public class ArduinoCommManager : MonoBehaviour {
 			Debug.Log(p);
 		}
 
-		port = new SerialPort("COM3", 9600);
+		port = new SerialPort("COM4", 9600);
 	}
 
 	// Use this for initialization
@@ -33,14 +33,13 @@ public class ArduinoCommManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//some key binds for testing functions
-//		if (Input.GetKeyDown ("v")) {
-//			
-//
-//		};
-//		if (Input.GetKeyDown ("t")) {
-//			Debug.Log("pressed t");
-//			port.Write("0");
-//		};
+		if (Input.GetKeyDown ("v")) {
+			TurnOn ();
+
+		};
+		if (Input.GetKeyDown ("t")) {
+			TurnOff ();
+		};
 
 		//strFromArduino = port.ReadLine();
 		//Debug.Log(strFromArduino);
