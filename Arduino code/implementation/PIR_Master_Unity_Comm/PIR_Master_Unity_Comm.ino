@@ -45,6 +45,7 @@ char none = '0';
 char screenOne = '1';
 char screenTwo = '2';
 char both = '3';
+char blank = '.';
 
 
 void setup(){
@@ -57,29 +58,29 @@ void setup(){
   digitalWrite(pirPos4, HIGH);
 
   //give the sensors time to calibrate
-  Serial.println("calibrating sensor ");
+  //Serial.println("calibrating sensor ");
   for(int i = 0; i < calibrationTime; i++){
-    Serial.print(calibrationTime - i);
-    Serial.print("-");
+//    Serial.print(calibrationTime - i);
+//    Serial.print("-");
     delay(1000);
   }
-  Serial.println();
-  Serial.println("done");
+//  Serial.println();
+//  Serial.println("done");
  
   //while making this Instructable, I had some issues with the PIR's output
   //going HIGH immediately after calibrating
   //this waits until the PIR's output is low before ending setup
   while (digitalRead(pirPin3) == HIGH || digitalRead(pirPin4) == HIGH) {
     delay(500);
-    Serial.print(".");     
+    //Serial.print(".");     
   }
-  Serial.print("SENSOR ACTIVE");
+  //Serial.print("SENSOR ACTIVE");
 }
 
 void loop(){
 
   if(digitalRead(pirPin3) == HIGH || digitalRead(pirPin4) == HIGH){  
-    checkSections();
+    //checkSections();
     
     if(lockLow3){ 
       //makes sure we wait for a transition to LOW before further output is made
@@ -107,7 +108,7 @@ void loop(){
     if(!lockLow3 && millis() - lowIn3 > pause){
       //makes sure this block of code is only executed again after
       //a new motion sequence has been detected
-      checkSections();
+      //checkSections();
       lockLow3 = true;
       delay(50);
     } 
@@ -124,13 +125,15 @@ void loop(){
     if(!lockLow4 && millis() - lowIn4 > pause){
       //makes sure this block of code is only executed again after
       //a new motion sequence has been detected
-      checkSections();
+      //checkSections();
       lockLow4 = true;                       
       delay(50);
     } 
   }
   
-  
+  checkSections();
+  //Serial.write(blank);
+  Serial.flush();
 }
 
 //check section
