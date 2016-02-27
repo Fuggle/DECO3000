@@ -28,8 +28,8 @@ MonoBehaviour:
   statesFoldout: 1
   sourceFoldout: 0
   createNewStateFoldout: 1
-  particleSettingsFoldout: 0
-  forcesFoldout: 0
+  particleSettingsFoldout: 1
+  forcesFoldout: 1
   manipulatorsFoldout: 0
   eventsFoldout: 0
   collisionFoldout: 0
@@ -44,16 +44,16 @@ MonoBehaviour:
   transformListFoldout: 0
   particleSettingsParticleCountFoldout: 0
   particleSettingsOverflowOffsetFoldout: 0
-  particleSettingsScatterFoldout: 0
+  particleSettingsScatterFoldout: 1
   particleSettingsEmissionFoldout: 0
-  particleSettingsSizeFoldout: 0
-  particleSettingsRotationFoldout: 0
-  particleSettingsLifetimeFoldout: 0
+  particleSettingsSizeFoldout: 1
+  particleSettingsRotationFoldout: 1
+  particleSettingsLifetimeFoldout: 1
   particleSettingsMaskFoldout: 0
   forceAnnihilationFoldout: 0
   forceInitialVelocityFoldout: 0
   forceLifetimeVelocityFoldout: 0
-  forceVelocityBendingFoldout: 0
+  forceVelocityBendingFoldout: 1
   forceTurbulenceFoldout: 0
   forceConstantForceFoldout: 0
   forceVelocityScaleFoldout: 0
@@ -122,10 +122,9 @@ MonoBehaviour:
   maximumAllowedTurbulenceScale: 10
   maximumAllowedStretchSpeed: 10
   maximumAllowedPrewarmCycles: 128
-  playgroundIcon: {fileID: 2800000, guid: 344d4b0036e1d401e8c6c53be26368f0, type: 3}
-  playgroundIconInactive: {fileID: 2800000, guid: 98f012e51010e4230ab7c549d6a11633,
-    type: 3}
-  playgroundIconHeavy: {fileID: 2800000, guid: 4335d7f605b524c1e993039678611c3e, type: 3}
+  playgroundIcon: {fileID: 0}
+  playgroundIconInactive: {fileID: 0}
+  playgroundIconHeavy: {fileID: 0}
   selectedLanguage: 0
   languages:
   - {fileID: 11400000, guid: 53495fd148e8545699f77b4d8012fbe2, type: 2}

@@ -27,6 +27,7 @@ public class NodeNew : MonoBehaviour {
 
 	void Start()
 	{
+		transform.localScale = new Vector3 (currentScale, currentScale, currentScale);
 		nodeController = Camera.main.GetComponent<NodeControllerNew> ();
 	}
 
